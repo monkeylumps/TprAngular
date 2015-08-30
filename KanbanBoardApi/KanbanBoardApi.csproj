@@ -130,10 +130,22 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\BoardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Dispatchers\ICommandDispatcher.cs" />
+    <Compile Include="Dispatchers\IQueryDispatcher.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HyperMedia\Exceptions\HyperMediaFactoryLinksNotFoundException.cs" />
+    <Compile Include="HyperMedia\Exceptions\HyperMediaFactoryLinksNullException.cs" />
+    <Compile Include="HyperMedia\HyperMediaFactory.cs" />
+    <Compile Include="HyperMedia\IHyperMediaFactory.cs" />
+    <Compile Include="HyperMedia\ILinkFactory.cs" />
+    <Compile Include="HyperMedia\LinkFactory.cs" />
+    <Compile Include="HyperMedia\States\BoardCollectionState.cs" />
+    <Compile Include="HyperMedia\States\BoardState.cs" />
+    <Compile Include="HyperMedia\States\IHyperMediaState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -166,7 +178,20 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\KanbanBoardApi.Commands\KanbanBoardApi.Commands.csproj">
+      <Project>{a5b2039f-920e-40fa-825b-dc851a4208c5}</Project>
+      <Name>KanbanBoardApi.Commands</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KanbanBoardApi.Dto\KanbanBoardApi.Dto.csproj">
+      <Project>{a9290459-9723-44f3-850d-cef3e25d86d1}</Project>
+      <Name>KanbanBoardApi.Dto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KanbanBoardApi.Queries\KanbanBoardApi.Queries.csproj">
+      <Project>{D8A980A2-8FC3-40C3-9FAE-BDB2A76D7583}</Project>
+      <Name>KanbanBoardApi.Queries</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
