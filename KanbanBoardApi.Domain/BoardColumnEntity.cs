@@ -1,6 +1,6 @@
 ﻿namespace KanbanBoardApi.Domain
 {
-    public class BoardColumn : EntityBase
+    public class BoardColumnEntity : EntityBase
     {
         public string Name { get; set; }
 

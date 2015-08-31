@@ -13,17 +13,18 @@ namespace KanbanBoardApi.UnitTests.Controllers
 {
     public class BoardColumnControllerrTests
     {
-        private Mock<IHyperMediaFactory> mockHyperMediaFactory;
-        private Mock<ICommandDispatcher> mockCommandDispatcher;
-        private Mock<IQueryDispatcher> mockQueryDispatcher;
         private BoardColumnController controller;
+        private Mock<ICommandDispatcher> mockCommandDispatcher;
+        private Mock<IHyperMediaFactory> mockHyperMediaFactory;
+        private Mock<IQueryDispatcher> mockQueryDispatcher;
 
         private void SetupController()
         {
-            mockHyperMediaFactory=  new Mock<IHyperMediaFactory>();
+            mockHyperMediaFactory = new Mock<IHyperMediaFactory>();
             mockCommandDispatcher = new Mock<ICommandDispatcher>();
             mockQueryDispatcher = new Mock<IQueryDispatcher>();
-            controller = new BoardColumnController(mockCommandDispatcher.Object, mockHyperMediaFactory.Object, mockQueryDispatcher.Object);
+            controller = new BoardColumnController(mockCommandDispatcher.Object, mockHyperMediaFactory.Object,
+                mockQueryDispatcher.Object);
         }
 
 
@@ -33,14 +34,16 @@ namespace KanbanBoardApi.UnitTests.Controllers
             // Arrange
             SetupController();
             var boardSlug = "test";
-            var column = new Dto.BoardColumn();
-            mockCommandDispatcher.Setup(x => x.HandleAsync<CreateBoardColumnCommand, BoardColumn>(It.IsAny<CreateBoardColumnCommand>()))
+            var column = new BoardColumn();
+            mockCommandDispatcher.Setup(
+                x => x.HandleAsync<CreateBoardColumnCommand, BoardColumn>(It.IsAny<CreateBoardColumnCommand>()))
                 .ReturnsAsync(new BoardColumn());
             mockHyperMediaFactory.Setup(x => x.GetLink(It.IsAny<IHyperMediaItem>(), It.IsAny<string>()))
                 .Returns("http://fake-url/");
 
             // Act
-            var createdNegotiatedContentResult = await controller.Post(boardSlug, column) as CreatedNegotiatedContentResult<Dto.BoardColumn>;
+            var createdNegotiatedContentResult =
+                await controller.Post(boardSlug, column) as CreatedNegotiatedContentResult<BoardColumn>;
 
             // Assert
             Assert.NotNull(createdNegotiatedContentResult);
@@ -53,7 +56,7 @@ namespace KanbanBoardApi.UnitTests.Controllers
             // Arrange
             SetupController();
             var boardSlug = "test";
-            var column = new Dto.BoardColumn();
+            var column = new BoardColumn();
             mockHyperMediaFactory.Setup(x => x.GetLink(It.IsAny<IHyperMediaItem>(), It.IsAny<string>()))
                 .Returns("http://fake-url/");
 
@@ -61,7 +64,11 @@ namespace KanbanBoardApi.UnitTests.Controllers
             await controller.Post(boardSlug, column);
 
             // Assert
-            mockCommandDispatcher.Verify(x => x.HandleAsync<CreateBoardColumnCommand, BoardColumn>(It.Is<CreateBoardColumnCommand>(y => y.BoardColumn == column && y.BoardSlug == boardSlug)), Times.Once);
+            mockCommandDispatcher.Verify(
+                x =>
+                    x.HandleAsync<CreateBoardColumnCommand, BoardColumn>(
+                        It.Is<CreateBoardColumnCommand>(y => y.BoardColumn == column && y.BoardSlug == boardSlug)),
+                Times.Once);
         }
 
         [Fact]
@@ -70,8 +77,9 @@ namespace KanbanBoardApi.UnitTests.Controllers
             // Arrange
             SetupController();
             var boardSlug = "test";
-            var column = new Dto.BoardColumn();
-            mockCommandDispatcher.Setup(x => x.HandleAsync<CreateBoardColumnCommand, BoardColumn>(It.IsAny<CreateBoardColumnCommand>()))
+            var column = new BoardColumn();
+            mockCommandDispatcher.Setup(
+                x => x.HandleAsync<CreateBoardColumnCommand, BoardColumn>(It.IsAny<CreateBoardColumnCommand>()))
                 .ReturnsAsync(new BoardColumn());
             mockHyperMediaFactory.Setup(x => x.GetLink(It.IsAny<IHyperMediaItem>(), It.IsAny<string>()))
                 .Returns("http://fake-url/");
@@ -89,7 +97,7 @@ namespace KanbanBoardApi.UnitTests.Controllers
             // Arrange
             SetupController();
             var boardSlug = "test";
-            var column = new Dto.BoardColumn();
+            var column = new BoardColumn();
             controller.ModelState.AddModelError("error", "error");
 
             // Act
@@ -106,7 +114,7 @@ namespace KanbanBoardApi.UnitTests.Controllers
             // Arrange
             SetupController();
             var boardSlug = "test";
-            var column = new Dto.BoardColumn();
+            var column = new BoardColumn();
 
             // Act
             var notFoundResult = await controller.Post(boardSlug, column) as NotFoundResult;
@@ -122,7 +130,7 @@ namespace KanbanBoardApi.UnitTests.Controllers
             // Arrange
             SetupController();
             var boardSlug = "test";
-            var column = new Dto.BoardColumn();
+            var column = new BoardColumn();
             mockCommandDispatcher.Setup(
                 x => x.HandleAsync<CreateBoardColumnCommand, BoardColumn>(It.IsAny<CreateBoardColumnCommand>()))
                 .Throws<CreateBoardColumnCommandSlugExistsException>();
@@ -141,7 +149,7 @@ namespace KanbanBoardApi.UnitTests.Controllers
             // Arrange
             SetupController();
             var boardSlug = "test";
-            var column = new Dto.BoardColumn();
+            var column = new BoardColumn();
             mockCommandDispatcher.Setup(
                 x => x.HandleAsync<CreateBoardColumnCommand, BoardColumn>(It.IsAny<CreateBoardColumnCommand>()))
                 .Throws<BoardNotFoundException>();
@@ -167,7 +175,8 @@ namespace KanbanBoardApi.UnitTests.Controllers
                 .ReturnsAsync(new BoardColumn());
 
             // Act
-            var okNegotiatedContentResult = await controller.Get(boardSlug, boardColumnSlug) as OkNegotiatedContentResult<BoardColumn>;
+            var okNegotiatedContentResult =
+                await controller.Get(boardSlug, boardColumnSlug) as OkNegotiatedContentResult<BoardColumn>;
 
             // Assert
             Assert.NotNull(okNegotiatedContentResult);

@@ -6,7 +6,6 @@ namespace KanbanBoardApi.HyperMedia
     public interface IRequestMessageProvider
     {
         HttpRequestMessage CurrentMessage { get; }
-
     }
 
     internal sealed class RequestMessageProvider : IRequestMessageProvider
@@ -20,7 +19,7 @@ namespace KanbanBoardApi.HyperMedia
 
         public HttpRequestMessage CurrentMessage
         {
-            get { return this.container.GetCurrentHttpRequestMessage(); }
+            get { return container.GetCurrentHttpRequestMessage(); }
         }
     }
 }

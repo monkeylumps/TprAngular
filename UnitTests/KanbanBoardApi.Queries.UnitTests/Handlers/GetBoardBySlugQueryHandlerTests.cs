@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using FakeDbSet;
+using KanbanBoardApi.Domain;
+using KanbanBoardApi.Dto;
 using KanbanBoardApi.EntityFramework;
 using KanbanBoardApi.Mapping;
 using KanbanBoardApi.Queries.Handlers;
@@ -11,16 +13,16 @@ namespace KanbanBoardApi.Queries.UnitTests.Handlers
 {
     public class GetBoardBySlugQueryHandlerTests
     {
+        private GetBoardBySlugQueryHandler handler;
         private Mock<IDataContext> mockDataContext;
         private Mock<IMappingService> mockMappingService;
-        private GetBoardBySlugQueryHandler handler;
 
-        private void SetupQueryHandler(IList<Domain.Board> data)
+        private void SetupQueryHandler(IList<BoardEntity> data)
         {
-            var fakeDbSet = new FakeDbSet<Domain.Board>();
+            var fakeDbSet = new FakeDbSet<BoardEntity>();
             data.ToList().ForEach(x => fakeDbSet.Add(x));
             mockDataContext = new Mock<IDataContext>();
-            mockDataContext.Setup(x => x.Set<Domain.Board>()).Returns(fakeDbSet);
+            mockDataContext.Setup(x => x.Set<BoardEntity>()).Returns(fakeDbSet);
 
             mockMappingService = new Mock<IMappingService>();
 
@@ -31,12 +33,12 @@ namespace KanbanBoardApi.Queries.UnitTests.Handlers
         public async void GivenQueryWhenBoardExistsReturnsBoard()
         {
             // Arrange
-            SetupQueryHandler(new List<Domain.Board>
+            SetupQueryHandler(new List<BoardEntity>
             {
-                new Domain.Board()
+                new BoardEntity()
             });
 
-            mockMappingService.Setup(x => x.Map<Dto.Board>(It.IsAny<Domain.Board>())).Returns(new Dto.Board());
+            mockMappingService.Setup(x => x.Map<Board>(It.IsAny<BoardEntity>())).Returns(new Board());
 
             var query = new GetBoardBySlugQuery();
 
@@ -51,7 +53,7 @@ namespace KanbanBoardApi.Queries.UnitTests.Handlers
         public async void GivenQueryWhenBoardDoesNotExistReturnNull()
         {
             // Arrange
-            SetupQueryHandler(new List<Domain.Board>());
+            SetupQueryHandler(new List<BoardEntity>());
             var query = new GetBoardBySlugQuery();
 
             // Act

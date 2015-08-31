@@ -16,7 +16,7 @@ namespace KanbanBoardApi.UnitTests.HyperMedia
 
         private void SetupHyperMediaFactory()
         {
-            factory = new HyperMediaFactory(getHyperMediaStates()); 
+            factory = new HyperMediaFactory(getHyperMediaStates());
         }
 
         [Fact]
@@ -55,7 +55,8 @@ namespace KanbanBoardApi.UnitTests.HyperMedia
             };
 
             // Act & Assert
-            Assert.Throws<HyperMediaFactoryLinksNotFoundException>(() => factory.GetLink(testableHypermediaItem, Link.SELF));
+            Assert.Throws<HyperMediaFactoryLinksNotFoundException>(
+                () => factory.GetLink(testableHypermediaItem, Link.SELF));
         }
 
 
@@ -88,7 +89,8 @@ namespace KanbanBoardApi.UnitTests.HyperMedia
             factory.Apply(testableHypermediaItem);
 
             // Assert
-            mockHyperMediaState.Verify(x => x.Apply(It.IsAny<object>()), Times.Once);;
+            mockHyperMediaState.Verify(x => x.Apply(It.IsAny<object>()), Times.Once);
+            ;
         }
 
         private class TestableHypermediaItem : IHyperMediaItem

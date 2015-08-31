@@ -3,7 +3,7 @@ using KanbanBoardApi.Domain;
 
 namespace KanbanBoardApi.EntityFramework.EntityMapping
 {
-    public class BoardColumnMapping : EntityTypeConfiguration<BoardColumn>
+    public class BoardColumnMapping : EntityTypeConfiguration<BoardColumnEntity>
     {
     }
 }

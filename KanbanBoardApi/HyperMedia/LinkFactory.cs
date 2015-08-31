@@ -11,7 +11,7 @@ namespace KanbanBoardApi.HyperMedia
         public LinkFactory(IRequestMessageProvider requestMessageProvider)
         {
             this.requestMessageProvider = requestMessageProvider;
-            this.urlHelper = new UrlHelper();
+            urlHelper = new UrlHelper();
         }
 
         public string Build(string routeName, object routeValues)

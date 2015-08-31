@@ -5,18 +5,18 @@ using KanbanBoardApi.Controllers;
 using KanbanBoardApi.Dispatchers;
 using KanbanBoardApi.Dto;
 using KanbanBoardApi.HyperMedia;
+using KanbanBoardApi.Queries;
 using Moq;
 using Xunit;
-using KanbanBoardApi.Queries;
 
 namespace KanbanBoardApi.UnitTests.Controllers
 {
     public class BoardControllerTests
     {
-        private Mock<ICommandDispatcher> mockCommandDispatcher;
-        private Mock<IQueryDispatcher> mockQueryDispatcher;
-        private Mock<IHyperMediaFactory> mockHyperMediaFactory;
         private BoardController controller;
+        private Mock<ICommandDispatcher> mockCommandDispatcher;
+        private Mock<IHyperMediaFactory> mockHyperMediaFactory;
+        private Mock<IQueryDispatcher> mockQueryDispatcher;
 
         private void SetupController()
         {
@@ -24,9 +24,9 @@ namespace KanbanBoardApi.UnitTests.Controllers
             mockQueryDispatcher = new Mock<IQueryDispatcher>();
             mockHyperMediaFactory = new Mock<IHyperMediaFactory>();
             controller = new BoardController(
-                    mockCommandDispatcher.Object,
-                    mockQueryDispatcher.Object,
-                    mockHyperMediaFactory.Object);
+                mockCommandDispatcher.Object,
+                mockQueryDispatcher.Object,
+                mockHyperMediaFactory.Object);
         }
 
         [Fact]
@@ -103,7 +103,7 @@ namespace KanbanBoardApi.UnitTests.Controllers
 
 
         [Fact]
-        public async void GivenABoardWhenBoardSlugAlreadyExistsThenReturnReturnsConflict ()
+        public async void GivenABoardWhenBoardSlugAlreadyExistsThenReturnReturnsConflict()
         {
             // Arrange
             SetupController();
@@ -169,7 +169,10 @@ namespace KanbanBoardApi.UnitTests.Controllers
             await controller.Get(boardSlug);
 
             // Assert
-            mockQueryDispatcher.Verify(x => x.HandleAsync<GetBoardBySlugQuery, Board>(It.Is<GetBoardBySlugQuery>(y => y.BoardSlug == boardSlug)), Times.Once);
+            mockQueryDispatcher.Verify(
+                x =>
+                    x.HandleAsync<GetBoardBySlugQuery, Board>(It.Is<GetBoardBySlugQuery>(y => y.BoardSlug == boardSlug)),
+                Times.Once);
         }
 
         [Fact]
@@ -228,7 +231,8 @@ namespace KanbanBoardApi.UnitTests.Controllers
             await controller.Search();
 
             // Assert
-            mockQueryDispatcher.Verify(x => x.HandleAsync<SearchBoardsQuery, BoardCollection>(It.IsAny<SearchBoardsQuery>()), Times.Once);
+            mockQueryDispatcher.Verify(
+                x => x.HandleAsync<SearchBoardsQuery, BoardCollection>(It.IsAny<SearchBoardsQuery>()), Times.Once);
         }
 
         [Fact]

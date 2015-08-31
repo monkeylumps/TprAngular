@@ -10,8 +10,8 @@ namespace KanbanBoardApi.UnitTests.HyperMedia.States
 {
     public class BoardCollectionStateTests
     {
-        private Mock<ILinkFactory> mockLinkFactory;
         private Mock<IBoardState> mockBoardState;
+        private Mock<ILinkFactory> mockLinkFactory;
         private BoardCollectionState state;
 
 

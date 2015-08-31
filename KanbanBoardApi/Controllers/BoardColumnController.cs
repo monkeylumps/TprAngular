@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using KanbanBoardApi.Commands;
@@ -18,7 +17,8 @@ namespace KanbanBoardApi.Controllers
         private readonly IHyperMediaFactory hyperMediaFactory;
         private readonly IQueryDispatcher queryDispatcher;
 
-        public BoardColumnController(ICommandDispatcher commandDispatcher, IHyperMediaFactory hyperMediaFactory, IQueryDispatcher queryDispatcher)
+        public BoardColumnController(ICommandDispatcher commandDispatcher, IHyperMediaFactory hyperMediaFactory,
+            IQueryDispatcher queryDispatcher)
         {
             this.commandDispatcher = commandDispatcher;
             this.hyperMediaFactory = hyperMediaFactory;
@@ -26,15 +26,16 @@ namespace KanbanBoardApi.Controllers
         }
 
         [HttpGet]
-        [Route("{boardSlug}/columns/{boardColumnSlug}", Name= "BoardColumnGet")]
-        [ResponseType(typeof(BoardColumn))]
+        [Route("{boardSlug}/columns/{boardColumnSlug}", Name = "BoardColumnGet")]
+        [ResponseType(typeof (BoardColumn))]
         public async Task<IHttpActionResult> Get(string boardSlug, string boardColumnSlug)
         {
-            var boardColumn = await queryDispatcher.HandleAsync<GetBoardColumnBySlugQuery, BoardColumn>(new GetBoardColumnBySlugQuery
-            {
-                BoardSlug = boardSlug,
-                BoardColumnSlug = boardColumnSlug
-            });
+            var boardColumn =
+                await queryDispatcher.HandleAsync<GetBoardColumnBySlugQuery, BoardColumn>(new GetBoardColumnBySlugQuery
+                {
+                    BoardSlug = boardSlug,
+                    BoardColumnSlug = boardColumnSlug
+                });
 
             if (boardColumn == null)
             {
@@ -48,7 +49,7 @@ namespace KanbanBoardApi.Controllers
 
         [HttpPost]
         [Route("{boardSlug}/columns")]
-        [ResponseType(typeof(BoardColumn))]
+        [ResponseType(typeof (BoardColumn))]
         public async Task<IHttpActionResult> Post(string boardSlug, BoardColumn boardColumn)
         {
             if (!ModelState.IsValid)
@@ -58,11 +59,12 @@ namespace KanbanBoardApi.Controllers
             try
             {
                 var result =
-                    await commandDispatcher.HandleAsync<CreateBoardColumnCommand, BoardColumn>(new CreateBoardColumnCommand
-                    {
-                        BoardSlug = boardSlug,
-                        BoardColumn = boardColumn
-                    });
+                    await
+                        commandDispatcher.HandleAsync<CreateBoardColumnCommand, BoardColumn>(new CreateBoardColumnCommand
+                        {
+                            BoardSlug = boardSlug,
+                            BoardColumn = boardColumn
+                        });
 
                 if (result == null)
                 {

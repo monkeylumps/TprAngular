@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Text;
+using System.Text.RegularExpressions;
 
 namespace KanbanBoardApi.Commands.Services
 {
@@ -6,7 +7,7 @@ namespace KanbanBoardApi.Commands.Services
     {
         public string Slugify(string phrase)
         {
-            string str = RemoveAccent(phrase).ToLower();
+            var str = RemoveAccent(phrase).ToLower();
             // invalid chars           
             str = Regex.Replace(str, @"[^a-z0-9\s-]", "");
             // convert multiple spaces into one space   
@@ -19,8 +20,8 @@ namespace KanbanBoardApi.Commands.Services
 
         private static string RemoveAccent(string txt)
         {
-            byte[] bytes = System.Text.Encoding.GetEncoding("Cyrillic").GetBytes(txt);
-            return System.Text.Encoding.ASCII.GetString(bytes);
+            var bytes = Encoding.GetEncoding("Cyrillic").GetBytes(txt);
+            return Encoding.ASCII.GetString(bytes);
         }
     }
 }

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using KanbanBoardApi.Dto.Validators;
 using FluentValidation.Attributes;
+using KanbanBoardApi.Dto.Validators;
 
 namespace KanbanBoardApi.Dto
 {
-    [Validator(typeof(BoardValidator))]
+    [Validator(typeof (BoardValidator))]
     public class Board : IHyperMediaItem
     {
         [StringLength(100)]

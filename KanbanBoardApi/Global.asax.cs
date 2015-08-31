@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Web;
+using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -7,7 +8,7 @@ using SimpleInjector;
 
 namespace KanbanBoardApi
 {
-    public class WebApiApplication : System.Web.HttpApplication
+    public class WebApiApplication : HttpApplication
     {
         private static Container container;
 

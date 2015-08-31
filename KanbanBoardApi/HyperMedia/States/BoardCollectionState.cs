@@ -5,8 +5,8 @@ namespace KanbanBoardApi.HyperMedia.States
 {
     public class BoardCollectionState : IHyperMediaState
     {
-        private readonly ILinkFactory linkFactory;
         private readonly IBoardState boardState;
+        private readonly ILinkFactory linkFactory;
 
         public BoardCollectionState(ILinkFactory linkFactory, IBoardState boardState)
         {
@@ -33,7 +33,7 @@ namespace KanbanBoardApi.HyperMedia.States
                 new Link
                 {
                     Rel = Link.SELF,
-                    Href = linkFactory.Build("BoardsSearch", new{ })
+                    Href = linkFactory.Build("BoardsSearch", new {})
                 }
             };
 

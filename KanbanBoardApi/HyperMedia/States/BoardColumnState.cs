@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Web.Http;
 using KanbanBoardApi.Dto;
 
 namespace KanbanBoardApi.HyperMedia.States
@@ -8,7 +7,7 @@ namespace KanbanBoardApi.HyperMedia.States
     {
     }
 
-    public class BoardColumnState  : IBoardColumnState
+    public class BoardColumnState : IBoardColumnState
     {
         private readonly ILinkFactory linkFactory;
 

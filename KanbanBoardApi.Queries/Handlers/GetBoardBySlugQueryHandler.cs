@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Threading.Tasks;
+using KanbanBoardApi.Domain;
 using KanbanBoardApi.Dto;
 using KanbanBoardApi.EntityFramework;
 using KanbanBoardApi.Mapping;
@@ -19,14 +20,14 @@ namespace KanbanBoardApi.Queries.Handlers
 
         public async Task<Board> HandleAsync(GetBoardBySlugQuery query)
         {
-            var board = await dataContext.Set<Domain.Board>().FirstOrDefaultAsync(x => x.Slug == query.BoardSlug);
+            var board = await dataContext.Set<BoardEntity>().FirstOrDefaultAsync(x => x.Slug == query.BoardSlug);
 
             if (board == null)
             {
                 return null;
             }
 
-            return mappingService.Map<Dto.Board>(board);
+            return mappingService.Map<Board>(board);
         }
     }
 }

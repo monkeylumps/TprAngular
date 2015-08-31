@@ -13,7 +13,7 @@ namespace KanbanBoardApi.EntityFramework.Migrations
         protected override void Seed(DataContext context)
         {
             //  This method will be called after migrating to the latest version.
-            context.Set<Board>().AddOrUpdate(x => x.Slug, new Board
+            context.Set<BoardEntity>().AddOrUpdate(x => x.Slug, new BoardEntity
             {
                 Name = "Work List",
                 Slug = "work-list"

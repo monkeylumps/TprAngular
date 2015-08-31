@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using KanbanBoardApi.Domain;
+using KanbanBoardApi.Dto;
 
 namespace KanbanBoardApi.Mapping.AutoMapperProfiles
 {
@@ -6,11 +8,11 @@ namespace KanbanBoardApi.Mapping.AutoMapperProfiles
     {
         protected override void Configure()
         {
-            CreateMap<Domain.Board, Dto.Board>();
-            CreateMap<Dto.Board, Domain.Board>();
+            CreateMap<BoardEntity, Board>();
+            CreateMap<Board, BoardEntity>();
 
-            CreateMap<Domain.BoardColumn, Dto.BoardColumn>();
-            CreateMap<Dto.BoardColumn, Domain.BoardColumn>();
+            CreateMap<BoardColumnEntity, BoardColumn>();
+            CreateMap<BoardColumn, BoardColumnEntity>();
         }
     }
 }

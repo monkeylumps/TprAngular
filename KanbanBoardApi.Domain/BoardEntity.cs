@@ -4,20 +4,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KanbanBoardApi.Domain
 {
-    public class Board : EntityBase
+    public class BoardEntity : EntityBase
     {
+        public BoardEntity()
+        {
+            Columns = new List<BoardColumnEntity>();
+        }
+
         [MaxLength(100)]
         public string Name { get; set; }
 
         [MaxLength(100)]
-        [Index(IsUnique=true)]
+        [Index(IsUnique = true)]
         public string Slug { get; set; }
 
-        public IList<BoardColumn> Columns { get; set; }
-
-        public Board()
-        {
-            Columns = new List<BoardColumn>();
-        }
+        public IList<BoardColumnEntity> Columns { get; set; }
     }
 }

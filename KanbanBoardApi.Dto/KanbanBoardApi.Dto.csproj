@@ -48,6 +48,7 @@
     <Compile Include="Board.cs" />
     <Compile Include="BoardCollection.cs" />
     <Compile Include="BoardColumn.cs" />
+    <Compile Include="BoardTask.cs" />
     <Compile Include="IHyperMediaItem.cs" />
     <Compile Include="Link.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

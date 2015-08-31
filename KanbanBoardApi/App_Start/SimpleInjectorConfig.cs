@@ -16,10 +16,10 @@ namespace KanbanBoardApi
     {
         public static void Register(Container container)
         {
-            container.Register(typeof(IQueryHandler<,>),new [] { typeof(IQueryHandler<,>).Assembly});
-            container.Register(typeof(ICommandHandler<,>), new [] { typeof(ICommandHandler<,>).Assembly});
+            container.Register(typeof (IQueryHandler<,>), new[] {typeof (IQueryHandler<,>).Assembly});
+            container.Register(typeof (ICommandHandler<,>), new[] {typeof (ICommandHandler<,>).Assembly});
 
-            container.RegisterCollection(typeof(IHyperMediaState), typeof(IHyperMediaState).Assembly);
+            container.RegisterCollection(typeof (IHyperMediaState), typeof (IHyperMediaState).Assembly);
             container.Register<IBoardState, BoardState>();
 
             container.Register<ISlugService, SlugService>();

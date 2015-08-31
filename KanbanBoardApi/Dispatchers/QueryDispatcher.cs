@@ -8,6 +8,7 @@ namespace KanbanBoardApi.Dispatchers
     public class QueryDispatcher : IQueryDispatcher
     {
         private readonly Container container;
+
         public QueryDispatcher(Container container)
         {
             this.container = container;

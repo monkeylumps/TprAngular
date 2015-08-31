@@ -8,10 +8,7 @@ namespace KanbanBoardApi
         public static void Register()
         {
             Mapper.Initialize(
-               x =>
-               {
-                   x.AddProfile<BoardMappingProfile>();
-               });
-        } 
+                x => { x.AddProfile<BoardMappingProfile>(); });
+        }
     }
 }

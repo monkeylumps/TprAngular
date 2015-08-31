@@ -11,16 +11,16 @@ namespace KanbanBoardApi.EntityFramework
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<DataContext, Configuration>());
         }
 
+        public new IDbSet<TEntity> Set<TEntity>() where TEntity : class
+        {
+            return base.Set<TEntity>();
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Configurations.Add(new BoardMapping());
             modelBuilder.Configurations.Add(new BoardColumnMapping());
-        }
-
-        public new IDbSet<TEntity> Set<TEntity>() where TEntity : class
-        {
-            return base.Set<TEntity>();
         }
     }
 }

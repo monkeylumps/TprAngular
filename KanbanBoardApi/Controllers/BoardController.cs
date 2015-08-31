@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using KanbanBoardApi.Commands;
@@ -15,10 +14,11 @@ namespace KanbanBoardApi.Controllers
     public class BoardController : ApiController
     {
         private readonly ICommandDispatcher commandDispatcher;
-        private readonly IQueryDispatcher queryDispatcher;
         private readonly IHyperMediaFactory hyperMediaFactory;
+        private readonly IQueryDispatcher queryDispatcher;
 
-        public BoardController(ICommandDispatcher commandDispatcher, IQueryDispatcher queryDispatcher, IHyperMediaFactory hyperMediaFactory)
+        public BoardController(ICommandDispatcher commandDispatcher, IQueryDispatcher queryDispatcher,
+            IHyperMediaFactory hyperMediaFactory)
         {
             this.commandDispatcher = commandDispatcher;
             this.queryDispatcher = queryDispatcher;
@@ -26,14 +26,14 @@ namespace KanbanBoardApi.Controllers
         }
 
         /// <summary>
-        /// Creates a new Kanban Board
+        ///     Creates a new Kanban Board
         /// </summary>
         /// <param name="board">Kanban board to create</param>
-        /// <response code="409"/>
-        /// <response code="400"/>
+        /// <response code="409" />
+        /// <response code="400" />
         [HttpPost]
         [Route("")]
-        [ResponseType(typeof(Board))]
+        [ResponseType(typeof (Board))]
         public async Task<IHttpActionResult> Post(Board board)
         {
             if (!ModelState.IsValid)
@@ -44,10 +44,10 @@ namespace KanbanBoardApi.Controllers
             try
             {
                 var result = await commandDispatcher.HandleAsync<CreateBoardCommand, Board>(
-                new CreateBoardCommand
-                {
-                    Board = board
-                });
+                    new CreateBoardCommand
+                    {
+                        Board = board
+                    });
 
                 hyperMediaFactory.Apply(result);
 
@@ -59,9 +59,9 @@ namespace KanbanBoardApi.Controllers
             }
         }
 
-        [Route("{boardSlug}", Name="BoardsGet")]
+        [Route("{boardSlug}", Name = "BoardsGet")]
         [HttpGet]
-        [ResponseType(typeof(Board))]
+        [ResponseType(typeof (Board))]
         public async Task<IHttpActionResult> Get(string boardSlug)
         {
             var result = await queryDispatcher.HandleAsync<GetBoardBySlugQuery, Board>(new GetBoardBySlugQuery
@@ -80,8 +80,8 @@ namespace KanbanBoardApi.Controllers
         }
 
         [HttpGet]
-        [Route("", Name="BoardsSearch")]
-        [ResponseType(typeof(BoardCollection))]
+        [Route("", Name = "BoardsSearch")]
+        [ResponseType(typeof (BoardCollection))]
         public async Task<IHttpActionResult> Search()
         {
             var result = await queryDispatcher.HandleAsync<SearchBoardsQuery, BoardCollection>(new SearchBoardsQuery());

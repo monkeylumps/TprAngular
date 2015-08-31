@@ -11,6 +11,7 @@ namespace KanbanBoardApi.UnitTests.HyperMedia.States
     {
         private Mock<ILinkFactory> mockLinkFactory;
         private BoardColumnState state;
+
         private void SetupState()
         {
             mockLinkFactory = new Mock<ILinkFactory>();
