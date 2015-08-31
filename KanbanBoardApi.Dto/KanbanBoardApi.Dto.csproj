@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Board.cs" />
+    <Compile Include="BoardTaskCollection.cs" />
     <Compile Include="BoardCollection.cs" />
     <Compile Include="BoardColumn.cs" />
     <Compile Include="BoardTask.cs" />

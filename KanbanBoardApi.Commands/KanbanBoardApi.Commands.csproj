@@ -51,11 +51,14 @@
   <ItemGroup>
     <Compile Include="CreateBoardColumnCommand.cs" />
     <Compile Include="CreateBoardCommand.cs" />
+    <Compile Include="CreateBoardTaskCommand.cs" />
+    <Compile Include="Exceptions\BoardColumnNotFoundException.cs" />
     <Compile Include="Exceptions\BoardNotFoundException.cs" />
     <Compile Include="Exceptions\CreateBoardColumnCommandSlugExistsException.cs" />
     <Compile Include="Exceptions\CreateBoardCommandSlugExistsException.cs" />
     <Compile Include="Handlers\CreateBoardColumnCommandHandler.cs" />
     <Compile Include="Handlers\CreateBoardCommandHandler.cs" />
+    <Compile Include="Handlers\CreateBoardTaskCommandHandler.cs" />
     <Compile Include="Handlers\ICommandHandler.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

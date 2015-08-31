@@ -125,7 +125,7 @@ namespace KanbanBoardApi.UnitTests.Controllers
 
 
         [Fact]
-        public async void GivenABoardSlugAndBoardColumnWhenSlugForBoardColumnexistsThenConflictReturned()
+        public async void GivenABoardSlugAndBoardColumnWhenSlugForBoardColumnExistsThenConflictReturned()
         {
             // Arrange
             SetupController();

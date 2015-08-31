@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="Handlers\CreateBoardColumnCommandHandlerTests.cs" />
     <Compile Include="Handlers\CreateBoardCommandHandlerTests.cs" />
+    <Compile Include="Handlers\CreateBoardTaskCommandHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

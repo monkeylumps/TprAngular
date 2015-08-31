@@ -21,6 +21,7 @@ namespace KanbanBoardApi.EntityFramework
             base.OnModelCreating(modelBuilder);
             modelBuilder.Configurations.Add(new BoardMapping());
             modelBuilder.Configurations.Add(new BoardColumnMapping());
+            modelBuilder.Configurations.Add(new BoardTaskMapping());
         }
     }
 }

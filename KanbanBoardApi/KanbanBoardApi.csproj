@@ -178,6 +178,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BoardColumnController.cs" />
     <Compile Include="Controllers\BoardController.cs" />
+    <Compile Include="Controllers\BoardTaskController.cs" />
     <Compile Include="Dispatchers\CommandDispatcher.cs" />
     <Compile Include="Dispatchers\ICommandDispatcher.cs" />
     <Compile Include="Dispatchers\IQueryDispatcher.cs" />
@@ -195,6 +196,7 @@
     <Compile Include="HyperMedia\States\BoardCollectionState.cs" />
     <Compile Include="HyperMedia\States\BoardColumnState.cs" />
     <Compile Include="HyperMedia\States\BoardState.cs" />
+    <Compile Include="HyperMedia\States\BoardTaskState.cs" />
     <Compile Include="HyperMedia\States\IHyperMediaState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

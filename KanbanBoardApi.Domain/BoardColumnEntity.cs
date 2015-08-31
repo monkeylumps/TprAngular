@@ -7,5 +7,7 @@
         public string Slug { get; set; }
 
         public int Order { get; set; }
+
+        public BoardEntity BoardEntity { get; set; }
     }
 }

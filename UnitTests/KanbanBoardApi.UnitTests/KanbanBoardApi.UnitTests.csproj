@@ -65,9 +65,11 @@
   <ItemGroup>
     <Compile Include="Controllers\BoardColumnControllerrTests.cs" />
     <Compile Include="Controllers\BoardControllerTests.cs" />
+    <Compile Include="Controllers\BoardTaskControllerTests.cs" />
     <Compile Include="HyperMedia\HyperMediaFactoryTests.cs" />
     <Compile Include="HyperMedia\States\BoardStateCollectionTests.cs" />
     <Compile Include="HyperMedia\States\BoardColumnStateTests.cs" />
+    <Compile Include="HyperMedia\States\BoardTaskStateTests.cs" />
     <Compile Include="HyperMedia\States\BoardStateTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -2,11 +2,9 @@
 
 namespace KanbanBoardApi.Dto
 {
-    public class BoardTask : IHyperMediaItem
+    public class BoardTaskCollection : IHyperMediaItem
     {
-        public int Id { get; set; }
-
-        public string Name { get; set; }
+        public IList<BoardTask> Items { get; set; }
 
         public IList<Link> Links { get; set; }
     }

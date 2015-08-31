@@ -60,7 +60,9 @@
   <ItemGroup>
     <Compile Include="Handlers\GetBoardBySlugQueryHandlerTests.cs" />
     <Compile Include="Handlers\GetBoardColumnBySlugQueryHandlerTests.cs" />
+    <Compile Include="Handlers\GetBoardTaskByIdQueryHandlerTests.cs" />
     <Compile Include="Handlers\SearchBoardsQueryHandlerTests.cs" />
+    <Compile Include="Handlers\SearchBoardTasksQueryHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
