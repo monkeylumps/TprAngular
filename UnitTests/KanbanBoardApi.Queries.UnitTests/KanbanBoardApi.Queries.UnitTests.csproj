@@ -30,7 +30,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\..\packages\Moq.4.2.1507.0118\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -38,12 +50,48 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="xunit.assert">
+      <HintPath>..\..\packages\xunit.assert.2.0.0\lib\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.assert.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.core">
+      <HintPath>..\..\packages\xunit.extensibility.core.2.0.0\lib\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Handlers\GetBoardBySlugQueryHandler.cs" />
+    <Compile Include="Handlers\GetBoardBySlugQueryHandlerTests.cs" />
+    <Compile Include="Handlers\SearchBoardsQueryHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\KanbanBoardApi.Domain\KanbanBoardApi.Domain.csproj">
+      <Project>{844f3198-7de0-45d1-98c0-afd834573f4f}</Project>
+      <Name>KanbanBoardApi.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\KanbanBoardApi.Dto\KanbanBoardApi.Dto.csproj">
+      <Project>{A9290459-9723-44F3-850D-CEF3E25D86D1}</Project>
+      <Name>KanbanBoardApi.Dto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\KanbanBoardApi.EntityFramework\KanbanBoardApi.EntityFramework.csproj">
+      <Project>{1D9246C5-88B9-4AB5-A495-01EACB9C4B51}</Project>
+      <Name>KanbanBoardApi.EntityFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\KanbanBoardApi.Mapping\KanbanBoardApi.Mapping.csproj">
+      <Project>{2F3877B7-2715-4D15-A2D0-4704DB24924C}</Project>
+      <Name>KanbanBoardApi.Mapping</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\KanbanBoardApi.Queries\KanbanBoardApi.Queries.csproj">
+      <Project>{D8A980A2-8FC3-40C3-9FAE-BDB2A76D7583}</Project>
+      <Name>KanbanBoardApi.Queries</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FakeDbSet\FakeDbSet.csproj">
+      <Project>{190D2440-5C87-492F-B90A-175F5F2941A5}</Project>
+      <Name>FakeDbSet</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

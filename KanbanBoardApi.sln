@@ -23,6 +23,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanbanBoardApi.Commands.Uni
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanbanBoardApi.Queries.UnitTests", "UnitTests\KanbanBoardApi.Queries.UnitTests\KanbanBoardApi.Queries.UnitTests.csproj", "{7BBFCBC1-A4C2-4926-99F6-0D1AE9084F5A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeDbSet", "UnitTests\FakeDbSet\FakeDbSet.csproj", "{190D2440-5C87-492F-B90A-175F5F2941A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanbanBoardApi.Mapping", "KanbanBoardApi.Mapping\KanbanBoardApi.Mapping.csproj", "{2F3877B7-2715-4D15-A2D0-4704DB24924C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +69,14 @@ Global
 		{7BBFCBC1-A4C2-4926-99F6-0D1AE9084F5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BBFCBC1-A4C2-4926-99F6-0D1AE9084F5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BBFCBC1-A4C2-4926-99F6-0D1AE9084F5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{190D2440-5C87-492F-B90A-175F5F2941A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{190D2440-5C87-492F-B90A-175F5F2941A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{190D2440-5C87-492F-B90A-175F5F2941A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{190D2440-5C87-492F-B90A-175F5F2941A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F3877B7-2715-4D15-A2D0-4704DB24924C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F3877B7-2715-4D15-A2D0-4704DB24924C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F3877B7-2715-4D15-A2D0-4704DB24924C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F3877B7-2715-4D15-A2D0-4704DB24924C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,5 +85,6 @@ Global
 		{790DEB72-DFCD-4885-ACB7-DF77E577830C} = {F9D47B70-A9A4-4FE1-853C-98FF24B2E53E}
 		{8566C7EB-6F00-43A8-A934-ADD8EF2ACC85} = {F9D47B70-A9A4-4FE1-853C-98FF24B2E53E}
 		{7BBFCBC1-A4C2-4926-99F6-0D1AE9084F5A} = {F9D47B70-A9A4-4FE1-853C-98FF24B2E53E}
+		{190D2440-5C87-492F-B90A-175F5F2941A5} = {F9D47B70-A9A4-4FE1-853C-98FF24B2E53E}
 	EndGlobalSection
 EndGlobal

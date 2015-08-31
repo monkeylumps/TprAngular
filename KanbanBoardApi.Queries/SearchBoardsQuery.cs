@@ -1,6 +1,6 @@
 ﻿namespace KanbanBoardApi.Queries
 {
-    public class SearchBoardsQuery
+    public class SearchBoardsQuery : IQuery
     {
          
     }
