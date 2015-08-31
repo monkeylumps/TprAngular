@@ -50,10 +50,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CreateBoardCommand.cs" />
+    <Compile Include="Exceptions\CreateBoardCommandSlugExistsException.cs" />
     <Compile Include="Handlers\CreateBoardCommandHandler.cs" />
     <Compile Include="Handlers\ICommandHandler.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ISlugService.cs" />
+    <Compile Include="Services\SlugService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

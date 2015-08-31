@@ -1,5 +1,6 @@
 ﻿using System.Web.Http.Results;
 using KanbanBoardApi.Commands;
+using KanbanBoardApi.Commands.Exceptions;
 using KanbanBoardApi.Controllers;
 using KanbanBoardApi.Dispatchers;
 using KanbanBoardApi.Dto;
@@ -98,6 +99,28 @@ namespace KanbanBoardApi.UnitTests.Controllers
             Assert.NotNull(createdNegotiatedContentResult);
             mockCommandDispatcher.Verify(x => x.HandleAsync<CreateBoardCommand, Board>(It.IsAny<CreateBoardCommand>()),
                 Times.Once);
+        }
+
+
+        [Fact]
+        public async void GivenABoardWhenSlugAlreadyExistsThenReturnReturnsConflict ()
+        {
+            // Arrange
+            SetupController();
+
+            var board = new Board
+            {
+                Name = "new board"
+            };
+
+            mockCommandDispatcher.Setup(x => x.HandleAsync<CreateBoardCommand, Board>(It.IsAny<CreateBoardCommand>()))
+                .Throws<CreateBoardCommandSlugExistsException>();
+
+            // Act
+            var conflictResult = await controller.Post(board) as ConflictResult;
+
+            // Act
+            Assert.NotNull(conflictResult);
         }
 
         [Fact]

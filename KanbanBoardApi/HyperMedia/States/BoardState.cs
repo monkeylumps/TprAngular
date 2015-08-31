@@ -1,7 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Security.Policy;
-using System.Web;
-using System.Web.Http.Routing;
 using KanbanBoardApi.Dto;
 
 namespace KanbanBoardApi.HyperMedia.States

@@ -50,12 +50,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataContext.cs" />
+    <Compile Include="EntityMapping\BoardMapping.cs" />
     <Compile Include="IDataContext.cs" />
+    <Compile Include="Migrations\Configuration .cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KanbanBoardApi.Domain\KanbanBoardApi.Domain.csproj">
+      <Project>{844F3198-7DE0-45D1-98C0-AFD834573F4F}</Project>
+      <Name>KanbanBoardApi.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

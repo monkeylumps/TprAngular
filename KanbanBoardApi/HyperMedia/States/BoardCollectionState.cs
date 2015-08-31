@@ -33,7 +33,7 @@ namespace KanbanBoardApi.HyperMedia.States
                 new Link
                 {
                     Rel = Link.SELF,
-                    Href = linkFactory.Build("BoardsGet", new{})
+                    Href = linkFactory.Build("BoardsSearch", new{ })
                 }
             };
 
