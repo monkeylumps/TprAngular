@@ -49,8 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreateBoardColumnCommand.cs" />
     <Compile Include="CreateBoardCommand.cs" />
+    <Compile Include="Exceptions\BoardNotFoundException.cs" />
+    <Compile Include="Exceptions\CreateBoardColumnCommandSlugExistsException.cs" />
     <Compile Include="Exceptions\CreateBoardCommandSlugExistsException.cs" />
+    <Compile Include="Handlers\CreateBoardColumnCommandHandler.cs" />
     <Compile Include="Handlers\CreateBoardCommandHandler.cs" />
     <Compile Include="Handlers\ICommandHandler.cs" />
     <Compile Include="ICommand.cs" />

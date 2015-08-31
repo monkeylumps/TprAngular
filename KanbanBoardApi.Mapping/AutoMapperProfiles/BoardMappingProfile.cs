@@ -8,6 +8,9 @@ namespace KanbanBoardApi.Mapping.AutoMapperProfiles
         {
             CreateMap<Domain.Board, Dto.Board>();
             CreateMap<Dto.Board, Domain.Board>();
+
+            CreateMap<Domain.BoardColumn, Dto.BoardColumn>();
+            CreateMap<Dto.BoardColumn, Domain.BoardColumn>();
         }
     }
 }

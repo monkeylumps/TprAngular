@@ -15,6 +15,7 @@ namespace KanbanBoardApi.EntityFramework
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Configurations.Add(new BoardMapping());
+            modelBuilder.Configurations.Add(new BoardColumnMapping());
         }
 
         public new IDbSet<TEntity> Set<TEntity>() where TEntity : class

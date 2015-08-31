@@ -59,14 +59,14 @@ namespace KanbanBoardApi.Controllers
             }
         }
 
-        [Route("{slug}", Name="BoardsGet")]
+        [Route("{boardSlug}", Name="BoardsGet")]
         [HttpGet]
         [ResponseType(typeof(Board))]
-        public async Task<IHttpActionResult> Get(string slug)
+        public async Task<IHttpActionResult> Get(string boardSlug)
         {
             var result = await queryDispatcher.HandleAsync<GetBoardBySlugQuery, Board>(new GetBoardBySlugQuery
             {
-                Slug = slug
+                BoardSlug = boardSlug
             });
 
             if (result == null)

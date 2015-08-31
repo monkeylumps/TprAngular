@@ -2,7 +2,7 @@
 {
     public class GetBoardBySlugQuery : IQuery
     {
-        public string Slug { get; set; }
+        public string BoardSlug { get; set; }
     }
 
     public interface IQuery

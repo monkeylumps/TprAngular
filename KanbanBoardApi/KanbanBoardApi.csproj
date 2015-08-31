@@ -176,8 +176,8 @@
     <Compile Include="App_Start\SimpleInjectorConfig.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\BoardColumnController.cs" />
     <Compile Include="Controllers\BoardController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Dispatchers\CommandDispatcher.cs" />
     <Compile Include="Dispatchers\ICommandDispatcher.cs" />
     <Compile Include="Dispatchers\IQueryDispatcher.cs" />
@@ -193,6 +193,7 @@
     <Compile Include="HyperMedia\IRequestMessageProvider.cs" />
     <Compile Include="HyperMedia\LinkFactory.cs" />
     <Compile Include="HyperMedia\States\BoardCollectionState.cs" />
+    <Compile Include="HyperMedia\States\BoardColumnState.cs" />
     <Compile Include="HyperMedia\States\BoardState.cs" />
     <Compile Include="HyperMedia\States\IHyperMediaState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -222,7 +223,6 @@
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>

@@ -103,7 +103,7 @@ namespace KanbanBoardApi.UnitTests.Controllers
 
 
         [Fact]
-        public async void GivenABoardWhenSlugAlreadyExistsThenReturnReturnsConflict ()
+        public async void GivenABoardWhenBoardSlugAlreadyExistsThenReturnReturnsConflict ()
         {
             // Arrange
             SetupController();
@@ -124,7 +124,7 @@ namespace KanbanBoardApi.UnitTests.Controllers
         }
 
         [Fact]
-        public async void GiveABoardWhenDataIsNotValidThenInvalidModelStateResultReturned()
+        public async void GivenABoardWhenDataIsNotValidThenInvalidModelStateResultReturned()
         {
             // Arrange
             SetupController();
@@ -142,16 +142,16 @@ namespace KanbanBoardApi.UnitTests.Controllers
         }
 
         [Fact]
-        public async void GiveASlugWhenBoardExistsThenBoardIsReturned()
+        public async void GivenABoardSlugWhenBoardExistsThenBoardIsReturned()
         {
             // Arrange
             SetupController();
-            const string slug = "test-slug";
+            const string boardSlug = "test-slug";
             mockQueryDispatcher.Setup(x => x.HandleAsync<GetBoardBySlugQuery, Board>(It.IsAny<GetBoardBySlugQuery>()))
                 .ReturnsAsync(new Board());
 
             // Act
-            var okNegotiatedContentResult = await controller.Get(slug) as OkNegotiatedContentResult<Board>;
+            var okNegotiatedContentResult = await controller.Get(boardSlug) as OkNegotiatedContentResult<Board>;
 
             // Assert
             Assert.NotNull(okNegotiatedContentResult);
@@ -163,27 +163,26 @@ namespace KanbanBoardApi.UnitTests.Controllers
         {
             // Arrange
             SetupController();
-            const string slug = "test-slug";
+            const string boardSlug = "test-slug";
 
             // Act
-            await controller.Get(slug);
+            await controller.Get(boardSlug);
 
             // Assert
-            mockQueryDispatcher.Verify(x => x.HandleAsync<GetBoardBySlugQuery, Board>(It.IsAny<GetBoardBySlugQuery>()), Times.Once);
+            mockQueryDispatcher.Verify(x => x.HandleAsync<GetBoardBySlugQuery, Board>(It.Is<GetBoardBySlugQuery>(y => y.BoardSlug == boardSlug)), Times.Once);
         }
-
 
         [Fact]
         public async void GiveASlugWhenBoardExistsThenHypermediaSet()
         {
             // Arrange
             SetupController();
-            const string slug = "test-slug";
+            const string boardSlug = "test-slug";
             mockQueryDispatcher.Setup(x => x.HandleAsync<GetBoardBySlugQuery, Board>(It.IsAny<GetBoardBySlugQuery>()))
                 .ReturnsAsync(new Board());
 
             // Act
-            await controller.Get(slug);
+            await controller.Get(boardSlug);
 
             // Assert
             mockHyperMediaFactory.Verify(x => x.Apply(It.IsAny<object>()), Times.Once);
@@ -194,15 +193,14 @@ namespace KanbanBoardApi.UnitTests.Controllers
         {
             // Arrange
             SetupController();
-            const string slug = "test-slug";
+            const string boardSlug = "test-slug";
 
             // Act
-            var notFoundResult = await controller.Get(slug) as NotFoundResult;
+            var notFoundResult = await controller.Get(boardSlug) as NotFoundResult;
 
             // Assert
             Assert.NotNull(notFoundResult);
         }
-
 
         [Fact]
         public async void GiveDefaultValuesWhenBoardsExistABoardCollectionIsReturned()

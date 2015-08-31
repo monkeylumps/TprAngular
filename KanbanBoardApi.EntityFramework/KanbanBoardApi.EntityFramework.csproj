@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataContext.cs" />
+    <Compile Include="EntityMapping\BoardColumnMapping.cs" />
     <Compile Include="EntityMapping\BoardMapping.cs" />
     <Compile Include="IDataContext.cs" />
     <Compile Include="Migrations\Configuration .cs" />

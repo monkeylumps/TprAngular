@@ -19,7 +19,7 @@ namespace KanbanBoardApi.Queries.Handlers
 
         public async Task<Board> HandleAsync(GetBoardBySlugQuery query)
         {
-            var board = await dataContext.Set<Domain.Board>().FirstOrDefaultAsync(x => x.Slug == query.Slug);
+            var board = await dataContext.Set<Domain.Board>().FirstOrDefaultAsync(x => x.Slug == query.BoardSlug);
 
             if (board == null)
             {

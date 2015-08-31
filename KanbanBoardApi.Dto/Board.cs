@@ -15,7 +15,6 @@ namespace KanbanBoardApi.Dto
         [StringLength(100)]
         public string Name { get; set; }
 
-
         public IList<Link> Links { get; set; }
     }
 }

@@ -54,7 +54,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GetBoardBySlugQuery.cs" />
+    <Compile Include="GetBoardColumnBySlugQuery.cs" />
     <Compile Include="Handlers\GetBoardBySlugQueryHandler.cs" />
+    <Compile Include="Handlers\GetBoardColumnBySlugQueryHandler.cs" />
     <Compile Include="Handlers\IQueryHandler.cs" />
     <Compile Include="Handlers\SearchBoardsQueryHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

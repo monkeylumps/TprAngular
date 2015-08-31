@@ -9,11 +9,11 @@ using Xunit;
 
 namespace KanbanBoardApi.Queries.UnitTests.Handlers
 {
-    public class GetBoardBySlugQueryHandlerTests
+    public class GetBoardColumnBySlugQueryHandlerTests
     {
         private Mock<IDataContext> mockDataContext;
         private Mock<IMappingService> mockMappingService;
-        private GetBoardBySlugQueryHandler handler;
+        private GetBoardColumnBySlugQueryHandler handler;
 
         private void SetupQueryHandler(IList<Domain.Board> data)
         {
@@ -24,7 +24,7 @@ namespace KanbanBoardApi.Queries.UnitTests.Handlers
 
             mockMappingService = new Mock<IMappingService>();
 
-            handler = new GetBoardBySlugQueryHandler(mockDataContext.Object, mockMappingService.Object);
+            handler = new GetBoardColumnBySlugQueryHandler(mockDataContext.Object, mockMappingService.Object);
         }
 
         [Fact]
@@ -33,18 +33,32 @@ namespace KanbanBoardApi.Queries.UnitTests.Handlers
             // Arrange
             SetupQueryHandler(new List<Domain.Board>
             {
-                new Domain.Board()
+                new Domain.Board
+                {
+                    Slug = "board-name",
+                    Columns = new List<Domain.BoardColumn>
+                    {
+                        new Domain.BoardColumn
+                        {
+                            Slug = "board-column-name"
+                        }
+                    }
+                }
             });
 
-            mockMappingService.Setup(x => x.Map<Dto.Board>(It.IsAny<Domain.Board>())).Returns(new Dto.Board());
+            mockMappingService.Setup(x => x.Map<Dto.BoardColumn>(It.IsAny<Domain.BoardColumn>())).Returns(new Dto.BoardColumn());
 
-            var query = new GetBoardBySlugQuery();
+            var query = new GetBoardColumnBySlugQuery
+            {
+                BoardSlug = "board-name",
+                BoardColumnSlug = "board-column-name"
+            };
 
             // Act
-            var board = await handler.HandleAsync(query);
+            var boardColumn = await handler.HandleAsync(query);
 
             // Assert
-            Assert.NotNull(board);
+            Assert.NotNull(boardColumn);
         }
 
         [Fact]
@@ -52,13 +66,13 @@ namespace KanbanBoardApi.Queries.UnitTests.Handlers
         {
             // Arrange
             SetupQueryHandler(new List<Domain.Board>());
-            var query = new GetBoardBySlugQuery();
+            var query = new GetBoardColumnBySlugQuery();
 
             // Act
-            var board = await handler.HandleAsync(query);
+            var boardColumn = await handler.HandleAsync(query);
 
             // Assert
-            Assert.Null(board);
+            Assert.Null(boardColumn);
         }
     }
 }

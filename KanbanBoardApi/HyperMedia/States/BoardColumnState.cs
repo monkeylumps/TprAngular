@@ -1,43 +1,45 @@
 ﻿using System.Collections.Generic;
+using System.Web.Http;
 using KanbanBoardApi.Dto;
 
 namespace KanbanBoardApi.HyperMedia.States
 {
-    public interface IBoardState : IHyperMediaState
+    public interface IBoardColumnState : IHyperMediaState
     {
     }
 
-    public class BoardState : IBoardState
+    public class BoardColumnState  : IBoardColumnState
     {
         private readonly ILinkFactory linkFactory;
 
-        public BoardState(ILinkFactory linkFactory)
+        public BoardColumnState(ILinkFactory linkFactory)
         {
             this.linkFactory = linkFactory;
         }
 
         public bool IsAppliable(object obj)
         {
-            return obj.GetType() == typeof (Board);
+            return obj.GetType() == typeof (BoardColumn);
         }
 
         public void Apply(object obj)
         {
-            var board = obj as Board;
+            var boardColumn = obj as BoardColumn;
 
-            if (board == null)
+            if (boardColumn == null)
             {
                 return;
             }
 
-            board.Links = new List<Link>
+            boardColumn.Links = new List<Link>
             {
                 new Link
                 {
                     Rel = Link.SELF,
-                    Href = linkFactory.Build("BoardsGet", new
+                    Href = linkFactory.Build("BoardColumnGet", new
                     {
-                        boardSlug = board.Slug
+                        boardSlug = linkFactory.GetRoutevalue("boardSlug"),
+                        boardColumnSlug = boardColumn.Slug
                     })
                 }
             };

@@ -1,4 +1,5 @@
-﻿using System.Web.Http.Routing;
+﻿using System.Net.Http;
+using System.Web.Http.Routing;
 
 namespace KanbanBoardApi.HyperMedia
 {
@@ -17,6 +18,11 @@ namespace KanbanBoardApi.HyperMedia
         {
             urlHelper.Request = requestMessageProvider.CurrentMessage;
             return urlHelper.Link(routeName, routeValues);
+        }
+
+        public object GetRoutevalue(string key)
+        {
+            return requestMessageProvider.CurrentMessage.GetRequestContext().RouteData.Values[key];
         }
     }
 }
