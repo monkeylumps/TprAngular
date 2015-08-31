@@ -26,11 +26,9 @@ namespace KanbanBoardApi.Controllers
         }
 
         /// <summary>
-        ///     Creates a new Kanban Board
+        /// Creates a new Kanban Board
         /// </summary>
         /// <param name="board">Kanban board to create</param>
-        /// <response code="409" />
-        /// <response code="400" />
         [HttpPost]
         [Route("")]
         [ResponseType(typeof (Board))]
@@ -59,6 +57,10 @@ namespace KanbanBoardApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Gets a Kanban board by it's Slug
+        /// </summary>
+        /// <param name="boardSlug">Slug of the board to return</param>
         [Route("{boardSlug}", Name = "BoardsGet")]
         [HttpGet]
         [ResponseType(typeof (Board))]
@@ -79,6 +81,9 @@ namespace KanbanBoardApi.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// Searchs for available Kanban Boards
+        /// </summary>
         [HttpGet]
         [Route("", Name = "BoardsSearch")]
         [ResponseType(typeof (BoardCollection))]
