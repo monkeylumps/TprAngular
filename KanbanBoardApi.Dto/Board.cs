@@ -11,6 +11,7 @@ namespace KanbanBoardApi.Dto
         [StringLength(100)]
         public string Slug { get; set; }
 
+        [Required]
         [StringLength(100)]
         public string Name { get; set; }
 
