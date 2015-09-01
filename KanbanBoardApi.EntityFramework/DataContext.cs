@@ -6,7 +6,7 @@ namespace KanbanBoardApi.EntityFramework
 {
     public class DataContext : DbContext, IDataContext
     {
-        public DataContext() : base("ValidationPoc")
+        public DataContext() : base("KanbanBoard")
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<DataContext, Configuration>());
         }
