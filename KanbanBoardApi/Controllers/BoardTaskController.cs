@@ -54,6 +54,29 @@ namespace KanbanBoardApi.Controllers
             }
         }
 
+        [HttpPut]
+        [Route("{boardSlug}/tasks/{taskId:int}", Name = "BoardTaskPut")]
+        [ResponseType(typeof(BoardTask))]
+        public async Task<IHttpActionResult> Put(string boardSlug, int taskId, BoardTask boardTask)
+        {
+            try
+            {
+                var result = await commandDispatcher.HandleAsync<UpdateBoardTaskCommand, BoardTask>(new UpdateBoardTaskCommand
+                {
+                    BoardSlug = boardSlug,
+                    BoardTask = boardTask
+                });
+
+                hyperMediaFactory.Apply(result);
+
+                return Ok(result);
+            }
+            catch (BoardTaskNotFoundException)
+            {
+                return NotFound();
+            }
+        }
+
         [HttpGet]
         [Route("{boardSlug}/tasks/{taskId:int}", Name = "BoardTaskGet")]
         [ResponseType(typeof(BoardTask))]

@@ -1,4 +1,5 @@
-﻿using System.Web.Http.Results;
+﻿using System.Runtime.CompilerServices;
+using System.Web.Http.Results;
 using KanbanBoardApi.Commands;
 using KanbanBoardApi.Commands.Exceptions;
 using KanbanBoardApi.Controllers;
@@ -50,7 +51,6 @@ namespace KanbanBoardApi.UnitTests.Controllers
             // Assert
             Assert.NotNull(createdNegotiatedContentResult);
         }
-
 
         [Fact]
         public async void GivenABoardSlugAndBoardColumnSlugAndTaskWhenBoardExistsThenCreateBoardTaskCommandCalled()
@@ -284,6 +284,92 @@ namespace KanbanBoardApi.UnitTests.Controllers
 
             // Assert
             mockHyperMediaFactory.Verify(x => x.Apply(It.IsAny<object>()), Times.Once);
+        }
+
+        [Fact]
+        public async void GivenABoardSlugTaskIdAndTaskWhenAllAreValidThenOkResultReturned()
+        {
+            // Arrange
+            SetupController();
+            const string boardSlug = "board-name";
+            const int taskId = 1;
+            var boardTask = new BoardTask
+            {
+                Id = taskId,
+                Name = "Updated Name"
+            };
+
+            // Act
+            var okNegotiatedContentResult = await controller.Put(boardSlug, taskId, boardTask) as OkNegotiatedContentResult<BoardTask>;
+
+            // Assert
+            Assert.NotNull(okNegotiatedContentResult);
+        }
+
+        [Fact]
+        public async void GivenABoardSlugTaskIdAndTaskWhenAllAreValidThenUpdateBoardTaskCommandCalled()
+        {
+            // Arrange
+            SetupController();
+            const string boardSlug = "board-name";
+            const int taskId = 1;
+            var boardTask = new BoardTask
+            {
+                Id = taskId,
+                Name = "Updated Name"
+            };
+
+            // Act
+            await controller.Put(boardSlug, taskId, boardTask);
+
+            // Assert
+            mockCommandDispatcher.Verify(x => x.HandleAsync<UpdateBoardTaskCommand, BoardTask>(It.Is<UpdateBoardTaskCommand>(
+                y => y.BoardSlug == boardSlug && y.BoardTask == boardTask
+                )), Times.Once);
+        }
+
+        [Fact]
+        public async void GivenABoardSlugTaskIdAndTaskWhenAllAreValidThenHypermediaSet()
+        {
+            // Arrange
+            SetupController();
+            const string boardSlug = "board-name";
+            const int taskId = 1;
+            var boardTask = new BoardTask
+            {
+                Id = taskId,
+                Name = "Updated Name"
+            };
+
+            // Act
+            await controller.Put(boardSlug, taskId, boardTask);
+
+            // Assert
+            mockHyperMediaFactory.Verify(x => x.Apply(It.IsAny<object>()), Times.Once);
+        }
+
+        [Fact]
+        public async void GivenABoardSlugTaskIdAndTaskWhenDoesNotExistThenNotFoundResultReturned()
+        {
+            // Arrange
+            SetupController();
+            const string boardSlug = "board-name";
+            const int taskId = 1;
+            var boardTask = new BoardTask
+            {
+                Id = taskId,
+                Name = "Updated Name"
+            };
+
+            mockCommandDispatcher.Setup(
+                x => x.HandleAsync<UpdateBoardTaskCommand, BoardTask>(It.IsAny<UpdateBoardTaskCommand>()))
+                .Throws<BoardTaskNotFoundException>();
+
+            // Act
+            var notFoundResult = await controller.Put(boardSlug, taskId, boardTask) as NotFoundResult;
+
+            // Assert
+            Assert.NotNull(notFoundResult);
         }
     }
 }

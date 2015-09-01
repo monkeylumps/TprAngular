@@ -53,6 +53,7 @@
     <Compile Include="CreateBoardCommand.cs" />
     <Compile Include="CreateBoardTaskCommand.cs" />
     <Compile Include="Exceptions\BoardColumnNotFoundException.cs" />
+    <Compile Include="Exceptions\BoardTaskNotFoundException.cs" />
     <Compile Include="Exceptions\BoardNotFoundException.cs" />
     <Compile Include="Exceptions\CreateBoardColumnCommandSlugExistsException.cs" />
     <Compile Include="Exceptions\CreateBoardCommandSlugExistsException.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ISlugService.cs" />
     <Compile Include="Services\SlugService.cs" />
+    <Compile Include="UpdateBoardTaskCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
