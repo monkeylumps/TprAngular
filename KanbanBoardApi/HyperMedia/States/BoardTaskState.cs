@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using KanbanBoardApi.Dto;
-using KanbanBoardApi.Queries;
 
 namespace KanbanBoardApi.HyperMedia.States
 {

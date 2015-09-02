@@ -197,6 +197,7 @@
     <Compile Include="HyperMedia\States\BoardColumnState.cs" />
     <Compile Include="HyperMedia\States\BoardState.cs" />
     <Compile Include="HyperMedia\States\BoardTaskState.cs" />
+    <Compile Include="HyperMedia\States\BoatdTaskCollectionState.cs" />
     <Compile Include="HyperMedia\States\IHyperMediaState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

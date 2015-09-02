@@ -99,7 +99,7 @@ namespace KanbanBoardApi.Controllers
         }
 
         [HttpGet]
-        [Route("{boardSlug}/tasks", Name = "BoardTaskSearch")]
+        [Route("{boardSlug}/tasks", Name = "BoardTasksSearch")]
         [Route("{boardSlug}/columns/{boardColumnSlug}/tasks", Name = "BoardTaskByBoardColumnSearch")]
         [ResponseType(typeof(BoardTask))]
         public async Task<IHttpActionResult> Search(string boardSlug, string boardColumnSlug = "")

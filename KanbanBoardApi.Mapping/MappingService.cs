@@ -8,5 +8,10 @@ namespace KanbanBoardApi.Mapping
         {
             return Mapper.Map<TDestination>(source);
         }
+
+        public TDestination Map<TSource, TDestination>(TSource source, TDestination destination)
+        {
+            return Mapper.Map(source, destination);
+        }
     }
 }

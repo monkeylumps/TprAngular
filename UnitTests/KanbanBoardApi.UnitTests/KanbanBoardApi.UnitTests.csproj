@@ -69,6 +69,7 @@
     <Compile Include="HyperMedia\HyperMediaFactoryTests.cs" />
     <Compile Include="HyperMedia\States\BoardStateCollectionTests.cs" />
     <Compile Include="HyperMedia\States\BoardColumnStateTests.cs" />
+    <Compile Include="HyperMedia\States\BoardTaskCollectionStateTests.cs" />
     <Compile Include="HyperMedia\States\BoardTaskStateTests.cs" />
     <Compile Include="HyperMedia\States\BoardStateTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

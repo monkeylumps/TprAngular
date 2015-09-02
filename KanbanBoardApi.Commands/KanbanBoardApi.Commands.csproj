@@ -61,6 +61,7 @@
     <Compile Include="Handlers\CreateBoardCommandHandler.cs" />
     <Compile Include="Handlers\CreateBoardTaskCommandHandler.cs" />
     <Compile Include="Handlers\ICommandHandler.cs" />
+    <Compile Include="Handlers\UpdateBoardTaskCommandHandler.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ISlugService.cs" />

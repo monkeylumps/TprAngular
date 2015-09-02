@@ -16,6 +16,11 @@ namespace KanbanBoardApi.EntityFramework
             return base.Set<TEntity>();
         }
 
+        public void SetModified(object entity)
+        {
+            Entry(entity).State = EntityState.Modified;
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

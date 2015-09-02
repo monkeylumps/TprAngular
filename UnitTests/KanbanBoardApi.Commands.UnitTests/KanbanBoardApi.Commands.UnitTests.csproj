@@ -68,6 +68,7 @@
     <Compile Include="Handlers\CreateBoardColumnCommandHandlerTests.cs" />
     <Compile Include="Handlers\CreateBoardCommandHandlerTests.cs" />
     <Compile Include="Handlers\CreateBoardTaskCommandHandlerTests.cs" />
+    <Compile Include="Handlers\UpdateBoardTaskCommandHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
