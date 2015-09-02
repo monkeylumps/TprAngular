@@ -8,6 +8,8 @@ namespace KanbanBoardApi.Dto
 
         public string Name { get; set; }
 
+        public string BoardColumnSlug { get; set; }
+
         public IList<Link> Links { get; set; }
     }
 }

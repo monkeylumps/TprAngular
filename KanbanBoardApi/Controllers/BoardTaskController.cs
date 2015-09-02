@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Http.Results;
 using KanbanBoardApi.Commands;
 using KanbanBoardApi.Commands.Exceptions;
 using KanbanBoardApi.Dispatchers;
@@ -74,6 +75,10 @@ namespace KanbanBoardApi.Controllers
             catch (BoardTaskNotFoundException)
             {
                 return NotFound();
+            }
+            catch (BoardColumnNotFoundException)
+            {
+                return BadRequest("Board Column Not Found");
             }
         }
 

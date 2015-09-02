@@ -1,4 +1,6 @@
 ﻿using System.Data.Entity;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using KanbanBoardApi.Commands.Exceptions;
 using KanbanBoardApi.Domain;
@@ -28,7 +30,18 @@ namespace KanbanBoardApi.Commands.Handlers
                 throw new BoardTaskNotFoundException();
             }
 
+            var boardColumnEntity = await dataContext.Set<BoardColumnEntity>()
+                .Where(x => x.Slug == command.BoardTask.BoardColumnSlug && x.BoardEntity.Slug == command.BoardSlug)
+                .FirstOrDefaultAsync();
+
+            if (boardColumnEntity == null)
+            {
+                throw new BoardColumnNotFoundException();
+            }
+
             mappingService.Map(command.BoardTask, boardTaskEntity);
+
+            boardTaskEntity.BoardColumnEntity = boardColumnEntity;
 
             dataContext.SetModified(boardTaskEntity);
 

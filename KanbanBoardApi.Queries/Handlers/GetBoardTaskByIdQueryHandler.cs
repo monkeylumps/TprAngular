@@ -20,7 +20,7 @@ namespace KanbanBoardApi.Queries.Handlers
 
         public async Task<BoardTask> HandleAsync(GetBoardTaskByIdQuery query)
         {
-            var boardTaskEntity = await dataContext.Set<BoardTaskEntity>().FirstOrDefaultAsync(x => x.Id == query.TaskId);
+            var boardTaskEntity = await dataContext.Set<BoardTaskEntity>().Include(x => x.BoardColumnEntity).FirstOrDefaultAsync(x => x.Id == query.TaskId);
 
             if (boardTaskEntity == null)
             {

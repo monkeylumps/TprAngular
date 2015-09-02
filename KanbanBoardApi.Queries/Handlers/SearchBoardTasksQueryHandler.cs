@@ -22,7 +22,9 @@ namespace KanbanBoardApi.Queries.Handlers
 
         public async Task<BoardTaskCollection> HandleAsync(SearchBoardTasksQuery query)
         {
-            var linqQuery = dataContext.Set<BoardTaskEntity>().Where(x => x.BoardColumnEntity.BoardEntity.Slug == query.BoardSlug);
+            var linqQuery = dataContext.Set<BoardTaskEntity>()
+                .Include(x => x.BoardColumnEntity)
+                .Where(x => x.BoardColumnEntity.BoardEntity.Slug == query.BoardSlug);
 
             if (!string.IsNullOrWhiteSpace(query.BoardColumnSlug))
             {

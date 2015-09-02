@@ -371,5 +371,30 @@ namespace KanbanBoardApi.UnitTests.Controllers
             // Assert
             Assert.NotNull(notFoundResult);
         }
+
+        [Fact]
+        public async void GivenABoardSlugTaskIdAndTaskWhenBoardColumnDoesNotExistThenNotFoundResultReturned()
+        {
+            // Arrange
+            SetupController();
+            const string boardSlug = "board-name";
+            const int taskId = 1;
+            var boardTask = new BoardTask
+            {
+                Id = taskId,
+                Name = "Updated Name"
+            };
+
+            mockCommandDispatcher.Setup(
+                x => x.HandleAsync<UpdateBoardTaskCommand, BoardTask>(It.IsAny<UpdateBoardTaskCommand>()))
+                .Throws<BoardColumnNotFoundException>();
+
+            // Act
+            var badRequestErrorMessageResult = await controller.Put(boardSlug, taskId, boardTask) as BadRequestErrorMessageResult;
+
+            // Assert
+            Assert.NotNull(badRequestErrorMessageResult);
+            Assert.Equal("Board Column Not Found", badRequestErrorMessageResult.Message);
+        }
     }
 }
