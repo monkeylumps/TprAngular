@@ -1,10 +1,8 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Threading.Tasks;
-using KanbanBoardApi.Commands.Exceptions;
 using KanbanBoardApi.Domain;
-using KanbanBoardApi.Dto;
 using KanbanBoardApi.EntityFramework;
+using KanbanBoardApi.Exceptions;
 
 namespace KanbanBoardApi.Commands.Handlers
 {

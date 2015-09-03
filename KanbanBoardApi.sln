@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeDbSet", "UnitTests\Fake
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanbanBoardApi.Mapping", "KanbanBoardApi.Mapping\KanbanBoardApi.Mapping.csproj", "{2F3877B7-2715-4D15-A2D0-4704DB24924C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanbanBoardApi.Exceptions", "KanbanBoardApi.Exceptions\KanbanBoardApi.Exceptions.csproj", "{238A4A72-29FF-4A4B-84C8-41BE8FA04F50}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,10 @@ Global
 		{2F3877B7-2715-4D15-A2D0-4704DB24924C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F3877B7-2715-4D15-A2D0-4704DB24924C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F3877B7-2715-4D15-A2D0-4704DB24924C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{238A4A72-29FF-4A4B-84C8-41BE8FA04F50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{238A4A72-29FF-4A4B-84C8-41BE8FA04F50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{238A4A72-29FF-4A4B-84C8-41BE8FA04F50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{238A4A72-29FF-4A4B-84C8-41BE8FA04F50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

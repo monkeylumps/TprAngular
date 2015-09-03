@@ -1,12 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using System.Web.Http.Results;
 using KanbanBoardApi.Commands;
-using KanbanBoardApi.Commands.Exceptions;
 using KanbanBoardApi.Dispatchers;
 using KanbanBoardApi.Dto;
+using KanbanBoardApi.Exceptions;
 using KanbanBoardApi.HyperMedia;
 using KanbanBoardApi.Queries;
 

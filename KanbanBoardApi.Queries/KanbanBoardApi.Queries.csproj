@@ -60,9 +60,11 @@
     <Compile Include="Handlers\GetBoardColumnBySlugQueryHandler.cs" />
     <Compile Include="Handlers\GetBoardTaskByIdQueryHandler.cs" />
     <Compile Include="Handlers\IQueryHandler.cs" />
+    <Compile Include="Handlers\SearchBoardColumnsQueryHandler.cs" />
     <Compile Include="Handlers\SearchBoardsQueryHandler.cs" />
     <Compile Include="Handlers\SearchBoardTasksQueryHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchBoardColumnsQuery.cs" />
     <Compile Include="SearchBoardsQuery.cs" />
     <Compile Include="SearchBoardTasksQuery.cs" />
   </ItemGroup>
@@ -78,6 +80,10 @@
     <ProjectReference Include="..\KanbanBoardApi.EntityFramework\KanbanBoardApi.EntityFramework.csproj">
       <Project>{1D9246C5-88B9-4AB5-A495-01EACB9C4B51}</Project>
       <Name>KanbanBoardApi.EntityFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KanbanBoardApi.Exceptions\KanbanBoardApi.Exceptions.csproj">
+      <Project>{238A4A72-29FF-4A4B-84C8-41BE8FA04F50}</Project>
+      <Name>KanbanBoardApi.Exceptions</Name>
     </ProjectReference>
     <ProjectReference Include="..\KanbanBoardApi.Mapping\KanbanBoardApi.Mapping.csproj">
       <Project>{2F3877B7-2715-4D15-A2D0-4704DB24924C}</Project>

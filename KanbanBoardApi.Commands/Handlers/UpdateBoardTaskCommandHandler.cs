@@ -1,11 +1,10 @@
 ﻿using System.Data.Entity;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using KanbanBoardApi.Commands.Exceptions;
 using KanbanBoardApi.Domain;
 using KanbanBoardApi.Dto;
 using KanbanBoardApi.EntityFramework;
+using KanbanBoardApi.Exceptions;
 using KanbanBoardApi.Mapping;
 
 namespace KanbanBoardApi.Commands.Handlers

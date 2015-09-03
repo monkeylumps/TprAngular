@@ -57,7 +57,7 @@ namespace KanbanBoardApi.UnitTests.HyperMedia.States
         {
             // Arrange
             SetupState();
-            mockLinkFactory.Setup(x => x.Build("BoardsSearch", It.IsAny<object>())).Returns("http://fake-url/");
+            mockLinkFactory.Setup(x => x.Build("BoardSearch", It.IsAny<object>())).Returns("http://fake-url/");
             var boardCollection = new BoardCollection();
 
             // Act
@@ -73,7 +73,7 @@ namespace KanbanBoardApi.UnitTests.HyperMedia.States
         {
             // Arrange
             SetupState();
-            mockLinkFactory.Setup(x => x.Build("BoardsSearch", It.IsAny<object>())).Returns("http://fake-url/");
+            mockLinkFactory.Setup(x => x.Build("BoardSearch", It.IsAny<object>())).Returns("http://fake-url/");
             var boardCollection = new BoardCollection
             {
                 Items = new List<Board>

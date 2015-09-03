@@ -1,9 +1,9 @@
 ﻿using System.Web.Http.Results;
 using KanbanBoardApi.Commands;
-using KanbanBoardApi.Commands.Exceptions;
 using KanbanBoardApi.Controllers;
 using KanbanBoardApi.Dispatchers;
 using KanbanBoardApi.Dto;
+using KanbanBoardApi.Exceptions;
 using KanbanBoardApi.HyperMedia;
 using KanbanBoardApi.Queries;
 using Moq;

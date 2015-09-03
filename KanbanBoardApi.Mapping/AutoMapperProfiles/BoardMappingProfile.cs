@@ -12,7 +12,8 @@ namespace KanbanBoardApi.Mapping.AutoMapperProfiles
             CreateMap<Board, BoardEntity>();
 
             CreateMap<BoardColumnEntity, BoardColumn>();
-            CreateMap<BoardColumn, BoardColumnEntity>();
+            CreateMap<BoardColumn, BoardColumnEntity>()
+                .ForMember(x => x.Slug, opt => opt.Ignore());
 
             CreateMap<BoardTaskEntity, BoardTask>()
                 .ForMember(x => x.BoardColumnSlug, x => x.MapFrom(y => y.BoardColumnEntity.Slug));

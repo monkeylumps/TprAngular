@@ -2,9 +2,9 @@
 using System.Web.Http;
 using System.Web.Http.Description;
 using KanbanBoardApi.Commands;
-using KanbanBoardApi.Commands.Exceptions;
 using KanbanBoardApi.Dispatchers;
 using KanbanBoardApi.Dto;
+using KanbanBoardApi.Exceptions;
 using KanbanBoardApi.HyperMedia;
 using KanbanBoardApi.Queries;
 
@@ -23,6 +23,61 @@ namespace KanbanBoardApi.Controllers
             this.commandDispatcher = commandDispatcher;
             this.hyperMediaFactory = hyperMediaFactory;
             this.queryDispatcher = queryDispatcher;
+        }
+
+        [HttpPut]
+        [Route("{boardSlug}/columns/{boardColumnSlug}", Name = "BoardColumnPut")]
+        public async Task<IHttpActionResult> Put(string boardSlug, string boardColumnSlug, BoardColumn boardColumn)
+        {
+            try
+            {
+                var result = await commandDispatcher.HandleAsync<UpdateBoardColumnCommand, BoardColumn>(new UpdateBoardColumnCommand
+                {
+                    BoardSlug = boardSlug,
+                    BoardColumnSlug = boardColumnSlug,
+                    BoardColumn = boardColumn
+                });
+
+                hyperMediaFactory.Apply(result);
+
+                return Ok(result);
+            }
+            catch (BoardNotFoundException)
+            {
+                return NotFound();
+            }
+            catch (BoardColumnNotFoundException)
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpDelete]
+        [Route("{boardSlug}/columns/{boardColumnSlug}", Name = "BoardColumnDelete")]
+        public async Task<IHttpActionResult> Delete(string boardSlug, string boardColumnSlug)
+        {
+            try
+            {
+                await commandDispatcher.HandleAsync<DeleteBoardColumnCommand, string>(new DeleteBoardColumnCommand
+                {
+                    BoardSlug = boardSlug,
+                    BoardColumnSlug = boardColumnSlug
+                });
+
+                return Ok();
+            }
+            catch (BoardNotFoundException)
+            {
+                return NotFound();
+            }
+            catch (BoardColumnNotFoundException)
+            {
+                return NotFound();
+            }
+            catch (BoardColumnNotEmptyException)
+            {
+                return BadRequest("Board Tasks Are Still Assocaited To This Board Column");
+            }
         }
 
         [HttpGet]
@@ -45,6 +100,29 @@ namespace KanbanBoardApi.Controllers
             hyperMediaFactory.Apply(boardColumn);
 
             return Ok(boardColumn);
+        }
+
+        [HttpGet]
+        [Route("{boardSlug}/columns", Name = "BoardColumnSearch")]
+        [ResponseType(typeof(BoardColumnCollection))]
+        public async Task<IHttpActionResult> Search(string boardSlug)
+        {
+            try
+            {
+                var boardColumnCollection = await queryDispatcher.HandleAsync<SearchBoardColumnsQuery, BoardColumnCollection>(
+                    new SearchBoardColumnsQuery
+                    {
+                        BoardSlug = boardSlug
+                    });
+
+                hyperMediaFactory.Apply(boardColumnCollection);
+
+                return Ok(boardColumnCollection);
+            }
+            catch (BoardNotFoundException)
+            {
+                return NotFound();
+            }
         }
 
         [HttpPost]

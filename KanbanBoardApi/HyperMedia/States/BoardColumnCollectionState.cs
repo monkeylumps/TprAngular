@@ -3,12 +3,12 @@ using KanbanBoardApi.Dto;
 
 namespace KanbanBoardApi.HyperMedia.States
 {
-    public class BoardCollectionState : IHyperMediaState
+    public class BoardColumnCollectionState : IHyperMediaState
     {
-        private readonly IBoardState boardState;
+        private readonly IBoardColumnState boardState;
         private readonly ILinkFactory linkFactory;
 
-        public BoardCollectionState(ILinkFactory linkFactory, IBoardState boardState)
+        public BoardColumnCollectionState(ILinkFactory linkFactory, IBoardColumnState boardState)
         {
             this.linkFactory = linkFactory;
             this.boardState = boardState;
@@ -16,33 +16,33 @@ namespace KanbanBoardApi.HyperMedia.States
 
         public bool IsAppliable(object obj)
         {
-            return obj.GetType() == typeof (BoardCollection);
+            return obj.GetType() == typeof (BoardColumnCollection);
         }
 
         public void Apply(object obj)
         {
-            var boardCollection = obj as BoardCollection;
+            var boardColumnCollection = obj as BoardColumnCollection;
 
-            if (boardCollection == null)
+            if (boardColumnCollection == null)
             {
                 return;
             }
 
-            boardCollection.Links = new List<Link>
+            boardColumnCollection.Links = new List<Link>
             {
                 new Link
                 {
                     Rel = Link.SELF,
-                    Href = linkFactory.Build("BoardSearch", new {})
+                    Href = linkFactory.Build("BoardColumnSearch", new {})
                 }
             };
 
-            if (boardCollection.Items == null)
+            if (boardColumnCollection.Items == null)
             {
                 return;
             }
 
-            foreach (var board in boardCollection.Items)
+            foreach (var board in boardColumnCollection.Items)
             {
                 boardState.Apply(board);
             }

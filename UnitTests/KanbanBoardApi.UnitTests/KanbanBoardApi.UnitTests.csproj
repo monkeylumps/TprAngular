@@ -63,11 +63,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\BoardColumnControllerrTests.cs" />
+    <Compile Include="Controllers\BoardColumnControllerTests.cs" />
     <Compile Include="Controllers\BoardControllerTests.cs" />
     <Compile Include="Controllers\BoardTaskControllerTests.cs" />
     <Compile Include="HyperMedia\HyperMediaFactoryTests.cs" />
-    <Compile Include="HyperMedia\States\BoardStateCollectionTests.cs" />
+    <Compile Include="HyperMedia\States\BoardColumnCollectionStateTests.cs" />
+    <Compile Include="HyperMedia\States\BoardCollectionStateTests.cs" />
     <Compile Include="HyperMedia\States\BoardColumnStateTests.cs" />
     <Compile Include="HyperMedia\States\BoardTaskCollectionStateTests.cs" />
     <Compile Include="HyperMedia\States\BoardTaskStateTests.cs" />
@@ -82,6 +83,10 @@
     <ProjectReference Include="..\..\KanbanBoardApi.Dto\KanbanBoardApi.Dto.csproj">
       <Project>{a9290459-9723-44f3-850d-cef3e25d86d1}</Project>
       <Name>KanbanBoardApi.Dto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\KanbanBoardApi.Exceptions\KanbanBoardApi.Exceptions.csproj">
+      <Project>{238A4A72-29FF-4A4B-84C8-41BE8FA04F50}</Project>
+      <Name>KanbanBoardApi.Exceptions</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\KanbanBoardApi.Queries\KanbanBoardApi.Queries.csproj">
       <Project>{D8A980A2-8FC3-40C3-9FAE-BDB2A76D7583}</Project>

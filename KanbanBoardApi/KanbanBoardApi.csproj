@@ -193,6 +193,7 @@
     <Compile Include="HyperMedia\ILinkFactory.cs" />
     <Compile Include="HyperMedia\IRequestMessageProvider.cs" />
     <Compile Include="HyperMedia\LinkFactory.cs" />
+    <Compile Include="HyperMedia\States\BoardColumnCollectionState.cs" />
     <Compile Include="HyperMedia\States\BoardCollectionState.cs" />
     <Compile Include="HyperMedia\States\BoardColumnState.cs" />
     <Compile Include="HyperMedia\States\BoardState.cs" />
@@ -241,6 +242,10 @@
     <ProjectReference Include="..\KanbanBoardApi.EntityFramework\KanbanBoardApi.EntityFramework.csproj">
       <Project>{1D9246C5-88B9-4AB5-A495-01EACB9C4B51}</Project>
       <Name>KanbanBoardApi.EntityFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KanbanBoardApi.Exceptions\KanbanBoardApi.Exceptions.csproj">
+      <Project>{238A4A72-29FF-4A4B-84C8-41BE8FA04F50}</Project>
+      <Name>KanbanBoardApi.Exceptions</Name>
     </ProjectReference>
     <ProjectReference Include="..\KanbanBoardApi.Mapping\KanbanBoardApi.Mapping.csproj">
       <Project>{2F3877B7-2715-4D15-A2D0-4704DB24924C}</Project>

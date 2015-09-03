@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using FakeDbSet;
-using KanbanBoardApi.Commands.Exceptions;
 using KanbanBoardApi.Commands.Handlers;
 using KanbanBoardApi.Domain;
 using KanbanBoardApi.Dto;
 using KanbanBoardApi.EntityFramework;
+using KanbanBoardApi.Exceptions;
 using KanbanBoardApi.Mapping;
 using Moq;
 using Xunit;

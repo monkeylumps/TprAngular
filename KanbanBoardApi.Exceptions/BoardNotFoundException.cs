@@ -1,10 +1,10 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace KanbanBoardApi.Commands.Exceptions
+namespace KanbanBoardApi.Exceptions
 {
     [Serializable]
-    public class BoardTaskNotFoundException : Exception
+    public class BoardNotFoundException : Exception
     {
         //
         // For guidelines regarding the creation of new exception types, see
@@ -13,19 +13,19 @@ namespace KanbanBoardApi.Commands.Exceptions
         //    http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dncscol/html/csharp07192001.asp
         //
 
-        public BoardTaskNotFoundException()
+        public BoardNotFoundException()
         {
         }
 
-        public BoardTaskNotFoundException(string message) : base(message)
+        public BoardNotFoundException(string message) : base(message)
         {
         }
 
-        public BoardTaskNotFoundException(string message, Exception inner) : base(message, inner)
+        public BoardNotFoundException(string message, Exception inner) : base(message, inner)
         {
         }
 
-        protected BoardTaskNotFoundException(
+        protected BoardNotFoundException(
             SerializationInfo info,
             StreamingContext context) : base(info, context)
         {

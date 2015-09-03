@@ -22,6 +22,7 @@ namespace KanbanBoardApi
             container.RegisterCollection(typeof (IHyperMediaState), typeof (IHyperMediaState).Assembly);
             container.Register<IBoardState, BoardState>();
             container.Register<IBoardTaskState, BoardTaskState>();
+            container.Register<IBoardColumnState, BoardColumnState>();
 
             container.Register<ISlugService, SlugService>();
 

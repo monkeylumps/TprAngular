@@ -2,9 +2,9 @@
 using System.Web.Http;
 using System.Web.Http.Description;
 using KanbanBoardApi.Commands;
-using KanbanBoardApi.Commands.Exceptions;
 using KanbanBoardApi.Dispatchers;
 using KanbanBoardApi.Dto;
+using KanbanBoardApi.Exceptions;
 using KanbanBoardApi.HyperMedia;
 using KanbanBoardApi.Queries;
 
@@ -85,7 +85,7 @@ namespace KanbanBoardApi.Controllers
         /// Searchs for available Kanban Boards
         /// </summary>
         [HttpGet]
-        [Route("", Name = "BoardsSearch")]
+        [Route("", Name = "BoardSearch")]
         [ResponseType(typeof (BoardCollection))]
         public async Task<IHttpActionResult> Search()
         {

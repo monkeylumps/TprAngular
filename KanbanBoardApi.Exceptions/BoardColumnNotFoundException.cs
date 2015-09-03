@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace KanbanBoardApi.Commands.Exceptions
+namespace KanbanBoardApi.Exceptions
 {
     [Serializable]
     public class BoardColumnNotFoundException : Exception
