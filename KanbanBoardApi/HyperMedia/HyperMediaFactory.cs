@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using KanbanBoardApi.Dto;
-using KanbanBoardApi.HyperMedia.Exceptions;
+using KanbanBoardApi.Exceptions;
 using KanbanBoardApi.HyperMedia.States;
 
 namespace KanbanBoardApi.HyperMedia

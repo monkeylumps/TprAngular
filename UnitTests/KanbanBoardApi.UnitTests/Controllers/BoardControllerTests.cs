@@ -29,226 +29,246 @@ namespace KanbanBoardApi.UnitTests.Controllers
                 mockHyperMediaFactory.Object);
         }
 
-        [Fact]
-        public async void GivenABoardWhenDataIsValidThenCreatedOkResultReturned()
+        public class Post : BoardControllerTests
         {
-            // Arrange
-            SetupController();
-
-            var board = new Board
+            [Fact]
+            public async void GivenABoardWhenDataIsValidThenCreatedOkResultReturned()
             {
-                Name = "new board"
-            };
+                // Arrange
+                SetupController();
 
-            mockCommandDispatcher.Setup(x => x.HandleAsync<CreateBoardCommand, Board>(It.IsAny<CreateBoardCommand>()))
-                .ReturnsAsync(new Board());
-            mockHyperMediaFactory.Setup(x => x.GetLink(It.IsAny<IHyperMediaItem>(), It.IsAny<string>()))
-                .Returns("http://fake-url/");
+                var board = new Board
+                {
+                    Name = "new board"
+                };
 
-            // Act
-            var createdNegotiatedContentResult = await controller.Post(board) as CreatedNegotiatedContentResult<Board>;
+                mockCommandDispatcher.Setup(
+                    x => x.HandleAsync<CreateBoardCommand, Board>(It.IsAny<CreateBoardCommand>()))
+                    .ReturnsAsync(new Board());
+                mockHyperMediaFactory.Setup(x => x.GetLink(It.IsAny<IHyperMediaItem>(), It.IsAny<string>()))
+                    .Returns("http://fake-url/");
 
-            // Assert
-            Assert.NotNull(createdNegotiatedContentResult);
-        }
+                // Act
+                var createdNegotiatedContentResult =
+                    await controller.Post(board) as CreatedNegotiatedContentResult<Board>;
 
-        [Fact]
-        public async void GivenABoardWhenDataIsValidThenHyperMediaSet()
-        {
-            // Arrange
-            SetupController();
+                // Assert
+                Assert.NotNull(createdNegotiatedContentResult);
+            }
 
-            var board = new Board
+            [Fact]
+            public async void GivenABoardWhenDataIsValidThenHyperMediaSet()
             {
-                Name = "new board"
-            };
+                // Arrange
+                SetupController();
 
-            mockCommandDispatcher.Setup(x => x.HandleAsync<CreateBoardCommand, Board>(It.IsAny<CreateBoardCommand>()))
-                .ReturnsAsync(new Board());
-            mockHyperMediaFactory.Setup(x => x.GetLink(It.IsAny<IHyperMediaItem>(), It.IsAny<string>()))
-                .Returns("http://fake-url/");
+                var board = new Board
+                {
+                    Name = "new board"
+                };
 
-            // Act
-            var createdNegotiatedContentResult = await controller.Post(board) as CreatedNegotiatedContentResult<Board>;
+                mockCommandDispatcher.Setup(
+                    x => x.HandleAsync<CreateBoardCommand, Board>(It.IsAny<CreateBoardCommand>()))
+                    .ReturnsAsync(new Board());
+                mockHyperMediaFactory.Setup(x => x.GetLink(It.IsAny<IHyperMediaItem>(), It.IsAny<string>()))
+                    .Returns("http://fake-url/");
 
-            // Assert
-            Assert.NotNull(createdNegotiatedContentResult);
-            mockHyperMediaFactory.Verify(x => x.Apply(It.IsAny<Board>()), Times.Once);
-        }
+                // Act
+                var createdNegotiatedContentResult =
+                    await controller.Post(board) as CreatedNegotiatedContentResult<Board>;
 
-        [Fact]
-        public async void GivenABoardWhenDataIsValidThenCreateBoardCommandCalled()
-        {
-            // Arrange
-            SetupController();
+                // Assert
+                Assert.NotNull(createdNegotiatedContentResult);
+                mockHyperMediaFactory.Verify(x => x.Apply(It.IsAny<Board>()), Times.Once);
+            }
 
-            var board = new Board
+            [Fact]
+            public async void GivenABoardWhenDataIsValidThenCreateBoardCommandCalled()
             {
-                Name = "new board"
-            };
+                // Arrange
+                SetupController();
 
-            mockCommandDispatcher.Setup(x => x.HandleAsync<CreateBoardCommand, Board>(It.IsAny<CreateBoardCommand>()))
-                .ReturnsAsync(new Board());
-            mockHyperMediaFactory.Setup(x => x.GetLink(It.IsAny<IHyperMediaItem>(), It.IsAny<string>()))
-                .Returns("http://fake-url/");
+                var board = new Board
+                {
+                    Name = "new board"
+                };
 
-            // Act
-            var createdNegotiatedContentResult = await controller.Post(board) as CreatedNegotiatedContentResult<Board>;
+                mockCommandDispatcher.Setup(
+                    x => x.HandleAsync<CreateBoardCommand, Board>(It.IsAny<CreateBoardCommand>()))
+                    .ReturnsAsync(new Board());
+                mockHyperMediaFactory.Setup(x => x.GetLink(It.IsAny<IHyperMediaItem>(), It.IsAny<string>()))
+                    .Returns("http://fake-url/");
 
-            // Assert
-            Assert.NotNull(createdNegotiatedContentResult);
-            mockCommandDispatcher.Verify(x => x.HandleAsync<CreateBoardCommand, Board>(It.IsAny<CreateBoardCommand>()),
-                Times.Once);
-        }
+                // Act
+                var createdNegotiatedContentResult =
+                    await controller.Post(board) as CreatedNegotiatedContentResult<Board>;
+
+                // Assert
+                Assert.NotNull(createdNegotiatedContentResult);
+                mockCommandDispatcher.Verify(
+                    x => x.HandleAsync<CreateBoardCommand, Board>(It.IsAny<CreateBoardCommand>()),
+                    Times.Once);
+            }
 
 
-        [Fact]
-        public async void GivenABoardWhenBoardSlugAlreadyExistsThenReturnReturnsConflict()
-        {
-            // Arrange
-            SetupController();
-
-            var board = new Board
+            [Fact]
+            public async void GivenABoardWhenBoardSlugAlreadyExistsThenReturnReturnsConflict()
             {
-                Name = "new board"
-            };
+                // Arrange
+                SetupController();
 
-            mockCommandDispatcher.Setup(x => x.HandleAsync<CreateBoardCommand, Board>(It.IsAny<CreateBoardCommand>()))
-                .Throws<CreateBoardCommandSlugExistsException>();
+                var board = new Board
+                {
+                    Name = "new board"
+                };
 
-            // Act
-            var conflictResult = await controller.Post(board) as ConflictResult;
+                mockCommandDispatcher.Setup(
+                    x => x.HandleAsync<CreateBoardCommand, Board>(It.IsAny<CreateBoardCommand>()))
+                    .Throws<CreateBoardCommandSlugExistsException>();
 
-            // Act
-            Assert.NotNull(conflictResult);
+                // Act
+                var conflictResult = await controller.Post(board) as ConflictResult;
+
+                // Act
+                Assert.NotNull(conflictResult);
+            }
+
+            [Fact]
+            public async void GivenABoardWhenDataIsNotValidThenInvalidModelStateResultReturned()
+            {
+                // Arrange
+                SetupController();
+
+                var board = new Board();
+
+                // force a validation error
+                controller.ModelState.AddModelError("error", "error");
+
+                // Act
+                var invalidModelStateResult = await controller.Post(board) as InvalidModelStateResult;
+
+                // Assert
+                Assert.NotNull(invalidModelStateResult);
+            }
         }
 
-        [Fact]
-        public async void GivenABoardWhenDataIsNotValidThenInvalidModelStateResultReturned()
+        public class Get : BoardControllerTests
         {
-            // Arrange
-            SetupController();
+            [Fact]
+            public async void GivenABoardSlugWhenBoardExistsThenBoardIsReturned()
+            {
+                // Arrange
+                SetupController();
+                const string boardSlug = "test-slug";
+                mockQueryDispatcher.Setup(
+                    x => x.HandleAsync<GetBoardBySlugQuery, Board>(It.IsAny<GetBoardBySlugQuery>()))
+                    .ReturnsAsync(new Board());
 
-            var board = new Board();
+                // Act
+                var okNegotiatedContentResult = await controller.Get(boardSlug) as OkNegotiatedContentResult<Board>;
 
-            // force a validation error
-            controller.ModelState.AddModelError("error", "error");
+                // Assert
+                Assert.NotNull(okNegotiatedContentResult);
+                Assert.NotNull(okNegotiatedContentResult.Content);
+            }
 
-            // Act
-            var invalidModelStateResult = await controller.Post(board) as InvalidModelStateResult;
+            [Fact]
+            public async void GivenASlugWhenBoardExistsThenGetBoardBySlugQueryCalled()
+            {
+                // Arrange
+                SetupController();
+                const string boardSlug = "test-slug";
 
-            // Assert
-            Assert.NotNull(invalidModelStateResult);
+                // Act
+                await controller.Get(boardSlug);
+
+                // Assert
+                mockQueryDispatcher.Verify(
+                    x =>
+                        x.HandleAsync<GetBoardBySlugQuery, Board>(
+                            It.Is<GetBoardBySlugQuery>(y => y.BoardSlug == boardSlug)),
+                    Times.Once);
+            }
+
+            [Fact]
+            public async void GiveASlugWhenBoardExistsThenHypermediaSet()
+            {
+                // Arrange
+                SetupController();
+                const string boardSlug = "test-slug";
+                mockQueryDispatcher.Setup(
+                    x => x.HandleAsync<GetBoardBySlugQuery, Board>(It.IsAny<GetBoardBySlugQuery>()))
+                    .ReturnsAsync(new Board());
+
+                // Act
+                await controller.Get(boardSlug);
+
+                // Assert
+                mockHyperMediaFactory.Verify(x => x.Apply(It.IsAny<object>()), Times.Once);
+            }
+
+            [Fact]
+            public async void GivenASlugWhenBoardDoesNotExistsThenNotFoundReturned()
+            {
+                // Arrange
+                SetupController();
+                const string boardSlug = "test-slug";
+
+                // Act
+                var notFoundResult = await controller.Get(boardSlug) as NotFoundResult;
+
+                // Assert
+                Assert.NotNull(notFoundResult);
+            }
         }
 
-        [Fact]
-        public async void GivenABoardSlugWhenBoardExistsThenBoardIsReturned()
+        public class Search : BoardControllerTests
         {
-            // Arrange
-            SetupController();
-            const string boardSlug = "test-slug";
-            mockQueryDispatcher.Setup(x => x.HandleAsync<GetBoardBySlugQuery, Board>(It.IsAny<GetBoardBySlugQuery>()))
-                .ReturnsAsync(new Board());
+            [Fact]
+            public async void GiveDefaultValuesWhenBoardsExistABoardCollectionIsReturned()
+            {
+                // Arrange
+                SetupController();
 
-            // Act
-            var okNegotiatedContentResult = await controller.Get(boardSlug) as OkNegotiatedContentResult<Board>;
+                // Act
+                var okNegotiatedContentResult = await controller.Search() as OkNegotiatedContentResult<BoardCollection>;
 
-            // Assert
-            Assert.NotNull(okNegotiatedContentResult);
-            Assert.NotNull(okNegotiatedContentResult.Content);
-        }
+                // Assert
+                Assert.NotNull(okNegotiatedContentResult);
+            }
 
-        [Fact]
-        public async void GivenASlugWhenBoardExistsThenGetBoardBySlugQueryCalled()
-        {
-            // Arrange
-            SetupController();
-            const string boardSlug = "test-slug";
+            [Fact]
+            public async void GivenDefaultvaluesWhenBoardsExistsThenSearchBoardsQueryCsalled()
+            {
+                // Arrange
+                SetupController();
+                mockQueryDispatcher.Setup(
+                    x => x.HandleAsync<SearchBoardsQuery, BoardCollection>(It.IsAny<SearchBoardsQuery>()))
+                    .ReturnsAsync(new BoardCollection());
 
-            // Act
-            await controller.Get(boardSlug);
+                // Act
+                await controller.Search();
 
-            // Assert
-            mockQueryDispatcher.Verify(
-                x =>
-                    x.HandleAsync<GetBoardBySlugQuery, Board>(It.Is<GetBoardBySlugQuery>(y => y.BoardSlug == boardSlug)),
-                Times.Once);
-        }
+                // Assert
+                mockQueryDispatcher.Verify(
+                    x => x.HandleAsync<SearchBoardsQuery, BoardCollection>(It.IsAny<SearchBoardsQuery>()), Times.Once);
+            }
 
-        [Fact]
-        public async void GiveASlugWhenBoardExistsThenHypermediaSet()
-        {
-            // Arrange
-            SetupController();
-            const string boardSlug = "test-slug";
-            mockQueryDispatcher.Setup(x => x.HandleAsync<GetBoardBySlugQuery, Board>(It.IsAny<GetBoardBySlugQuery>()))
-                .ReturnsAsync(new Board());
+            [Fact]
+            public async void GivenDefaultvaluesWhenBoardsExistsThenHypermediaSet()
+            {
+                // Arrange
+                SetupController();
+                mockQueryDispatcher.Setup(
+                    x => x.HandleAsync<SearchBoardsQuery, BoardCollection>(It.IsAny<SearchBoardsQuery>()))
+                    .ReturnsAsync(new BoardCollection());
 
-            // Act
-            await controller.Get(boardSlug);
+                // Act
+                await controller.Search();
 
-            // Assert
-            mockHyperMediaFactory.Verify(x => x.Apply(It.IsAny<object>()), Times.Once);
-        }
-
-        [Fact]
-        public async void GivenASlugWhenBoardDoesNotExistsThenNotFoundReturned()
-        {
-            // Arrange
-            SetupController();
-            const string boardSlug = "test-slug";
-
-            // Act
-            var notFoundResult = await controller.Get(boardSlug) as NotFoundResult;
-
-            // Assert
-            Assert.NotNull(notFoundResult);
-        }
-
-        [Fact]
-        public async void GiveDefaultValuesWhenBoardsExistABoardCollectionIsReturned()
-        {
-            // Arrange
-            SetupController();
-
-            // Act
-            var okNegotiatedContentResult = await controller.Search() as OkNegotiatedContentResult<BoardCollection>;
-
-            // Assert
-            Assert.NotNull(okNegotiatedContentResult);
-        }
-
-        [Fact]
-        public async void GivenDefaultvaluesWhenBoardsExistsThenSearchBoardsQueryCsalled()
-        {
-            // Arrange
-            SetupController();
-            mockQueryDispatcher.Setup(
-                x => x.HandleAsync<SearchBoardsQuery, BoardCollection>(It.IsAny<SearchBoardsQuery>()))
-                .ReturnsAsync(new BoardCollection());
-
-            // Act
-            await controller.Search();
-
-            // Assert
-            mockQueryDispatcher.Verify(
-                x => x.HandleAsync<SearchBoardsQuery, BoardCollection>(It.IsAny<SearchBoardsQuery>()), Times.Once);
-        }
-
-        [Fact]
-        public async void GivenDefaultvaluesWhenBoardsExistsThenHypermediaSet()
-        {
-            // Arrange
-            SetupController();
-            mockQueryDispatcher.Setup(
-                x => x.HandleAsync<SearchBoardsQuery, BoardCollection>(It.IsAny<SearchBoardsQuery>()))
-                .ReturnsAsync(new BoardCollection());
-
-            // Act
-            await controller.Search();
-
-            // Assert
-            mockHyperMediaFactory.Verify(x => x.Apply(It.IsAny<object>()), Times.Once);
+                // Assert
+                mockHyperMediaFactory.Verify(x => x.Apply(It.IsAny<object>()), Times.Once);
+            }
         }
     }
 }

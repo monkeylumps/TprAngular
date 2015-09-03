@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace KanbanBoardApi.HyperMedia.Exceptions
+namespace KanbanBoardApi.Exceptions
 {
     [Serializable]
     public class HyperMediaFactoryLinksNotFoundException : Exception

@@ -46,6 +46,8 @@
     <Compile Include="BoardTaskNotFoundException.cs" />
     <Compile Include="CreateBoardColumnCommandSlugExistsException.cs" />
     <Compile Include="CreateBoardCommandSlugExistsException.cs" />
+    <Compile Include="HyperMediaFactoryLinksNotFoundException.cs" />
+    <Compile Include="HyperMediaFactoryLinksNullException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using KanbanBoardApi.Dto;
+using KanbanBoardApi.Exceptions;
 using KanbanBoardApi.HyperMedia;
-using KanbanBoardApi.HyperMedia.Exceptions;
 using KanbanBoardApi.HyperMedia.States;
 using Moq;
 using Xunit;

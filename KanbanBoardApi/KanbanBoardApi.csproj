@@ -186,8 +186,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="HyperMedia\Exceptions\HyperMediaFactoryLinksNotFoundException.cs" />
-    <Compile Include="HyperMedia\Exceptions\HyperMediaFactoryLinksNullException.cs" />
     <Compile Include="HyperMedia\HyperMediaFactory.cs" />
     <Compile Include="HyperMedia\IHyperMediaFactory.cs" />
     <Compile Include="HyperMedia\ILinkFactory.cs" />
