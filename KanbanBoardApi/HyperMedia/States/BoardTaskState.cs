@@ -38,7 +38,7 @@ namespace KanbanBoardApi.HyperMedia.States
                     Href = linkFactory.Build("BoardTaskGet", new
                     {
                         taskId = boardTask.Id,
-                        boardSlug = linkFactory.GetRoutevalue("boardSlug")
+                        boardSlug = linkFactory.GetRouteValue("boardSlug")
                     })
                 }
             };

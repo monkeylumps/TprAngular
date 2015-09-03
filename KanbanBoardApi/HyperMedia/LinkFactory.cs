@@ -20,7 +20,7 @@ namespace KanbanBoardApi.HyperMedia
             return urlHelper.Link(routeName, routeValues);
         }
 
-        public object GetRoutevalue(string key)
+        public object GetRouteValue(string key)
         {
             return requestMessageProvider.CurrentMessage.GetRequestContext().RouteData.Values[key];
         }

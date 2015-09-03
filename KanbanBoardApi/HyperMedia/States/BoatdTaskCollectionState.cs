@@ -40,7 +40,7 @@ namespace KanbanBoardApi.HyperMedia.States
                     Rel = Link.SELF,
                     Href = linkFactory.Build("BoardTasksSearch", new
                     {
-                        boardSlug = linkFactory.GetRoutevalue("boardSlug")
+                        boardSlug = linkFactory.GetRouteValue("boardSlug")
                     })
                 }
             };
