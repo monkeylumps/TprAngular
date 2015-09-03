@@ -21,6 +21,11 @@ namespace KanbanBoardApi.EntityFramework
             Entry(entity).State = EntityState.Modified;
         }
 
+        public void Delete(object entity)
+        {
+            Entry(entity).State = EntityState.Deleted;
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

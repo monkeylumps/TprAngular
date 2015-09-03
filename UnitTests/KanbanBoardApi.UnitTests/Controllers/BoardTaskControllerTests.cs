@@ -31,12 +31,11 @@ namespace KanbanBoardApi.UnitTests.Controllers
         }
 
         [Fact]
-        public async void GivenABoardSlugAndBoardColumnSlugAndTaskWhenBoardAndColumnExistsThenReturnOkResult()
+        public async void GivenABoardSlugAndTaskWhenBoardAndColumnExistsThenReturnOkResult()
         {
             // Arrange
             SetupController();
             const string boardSlug = "board-name";
-            const string boardColumnSlug = "board-column-name";
             var boardTask = new BoardTask();
             mockCommandDispatcher.Setup(
                 x => x.HandleAsync<CreateBoardTaskCommand, BoardTask>(It.IsAny<CreateBoardTaskCommand>()))
@@ -46,41 +45,39 @@ namespace KanbanBoardApi.UnitTests.Controllers
 
             // Act
             var createdNegotiatedContentResult =
-                await controller.Post(boardSlug, boardColumnSlug, boardTask) as CreatedNegotiatedContentResult<BoardTask>;
+                await controller.Post(boardSlug, boardTask) as CreatedNegotiatedContentResult<BoardTask>;
 
             // Assert
             Assert.NotNull(createdNegotiatedContentResult);
         }
 
         [Fact]
-        public async void GivenABoardSlugAndBoardColumnSlugAndTaskWhenBoardExistsThenCreateBoardTaskCommandCalled()
+        public async void GivenABoardSlugAndTaskWhenBoardExistsThenCreateBoardTaskCommandCalled()
         {
             // Arrange
             SetupController();
             const string boardSlug = "board-name";
-            const string boardColumnSlug = "board-column-name";
             var boardTask = new BoardTask();
             mockHyperMediaFactory.Setup(x => x.GetLink(It.IsAny<IHyperMediaItem>(), It.IsAny<string>()))
                 .Returns("http://fake-url/");
 
             // Act
-            await controller.Post(boardSlug, boardColumnSlug, boardTask);
+            await controller.Post(boardSlug, boardTask);
 
             // Assert
             mockCommandDispatcher.Verify(
                 x =>
                     x.HandleAsync<CreateBoardTaskCommand, BoardTask>(
-                        It.Is<CreateBoardTaskCommand>(y => y.BoardTask == boardTask && y.BoardSlug == boardSlug && y.BoardColumnSlug == boardColumnSlug)),
+                        It.Is<CreateBoardTaskCommand>(y => y.BoardTask == boardTask && y.BoardSlug == boardSlug)),
                 Times.Once);
         }
 
         [Fact]
-        public async void GivenABoardSlugAndBoardColumnSlugAndTaskWhenBoardExistsThenHyperMediaSet()
+        public async void GivenABoardSlugSlugAndTaskWhenBoardExistsThenHyperMediaSet()
         {
             // Arrange
             SetupController();
             const string boardSlug = "board-name";
-            const string boardColumnSlug = "board-column-name";
             var boardTask = new BoardTask();
             mockCommandDispatcher.Setup(
                 x => x.HandleAsync<CreateBoardTaskCommand, BoardTask>(It.IsAny<CreateBoardTaskCommand>()))
@@ -89,46 +86,63 @@ namespace KanbanBoardApi.UnitTests.Controllers
                 .Returns("http://fake-url/");
 
             // Act
-            await controller.Post(boardSlug, boardColumnSlug, boardTask);
+            await controller.Post(boardSlug, boardTask);
 
             // Assert
             mockHyperMediaFactory.Verify(x => x.Apply(It.IsAny<BoardTask>()), Times.Once);
         }
 
         [Fact]
-        public async void GivenABoardSlugAndBoardColumnSlugAndTaskWhenBoardColumnIsInvalidThenReturnInvalidModelState()
+        public async void GivenABoardSlugAndTaskWhenBoardColumnIsInvalidThenReturnInvalidModelState()
         {
             // Arrange
             SetupController();
             const string boardSlug = "board-name";
-            const string boardColumnSlug = "board-column-name";
             var boardTask = new BoardTask();
             controller.ModelState.AddModelError("error", "error");
 
             // Act
-            var invalidModelStateResult = await controller.Post(boardSlug, boardColumnSlug, boardTask) as InvalidModelStateResult;
+            var invalidModelStateResult = await controller.Post(boardSlug, boardTask) as InvalidModelStateResult;
 
             // Assert
             Assert.NotNull(invalidModelStateResult);
         }
 
         [Fact]
-        public async void GivenABoardSlugAndBoardColumnSlugAndTaskWhenBoardColumnDoesNotExistThenNotFound()
+        public async void GivenABoardSlugAndTaskWhenBoardDoesNotExistThenNotFound()
         {
             // Arrange
             SetupController();
             const string boardSlug = "board-name";
-            const string boardColumnSlug = "board-column-name";
+            var boardTask = new BoardTask();
+            mockCommandDispatcher.Setup(
+                x => x.HandleAsync<CreateBoardTaskCommand, BoardTask>(It.IsAny<CreateBoardTaskCommand>()))
+                .Throws<BoardNotFoundException>();
+
+            // Act
+            var notFoundResult = await controller.Post(boardSlug, boardTask) as NotFoundResult;
+
+            // Assert
+            Assert.NotNull(notFoundResult);
+        }
+
+        [Fact]
+        public async void GivenABoardSlugAndTaskWhenBoardColumnDoesNotExistThenBadRequestReturned()
+        {
+            // Arrange
+            SetupController();
+            const string boardSlug = "board-name";
             var boardTask = new BoardTask();
             mockCommandDispatcher.Setup(
                 x => x.HandleAsync<CreateBoardTaskCommand, BoardTask>(It.IsAny<CreateBoardTaskCommand>()))
                 .Throws<BoardColumnNotFoundException>();
 
             // Act
-            var notFoundResult = await controller.Post(boardSlug, boardColumnSlug, boardTask) as NotFoundResult;
+            var badRequestErrorMessageResult = await controller.Post(boardSlug, boardTask) as BadRequestErrorMessageResult;
 
             // Assert
-            Assert.NotNull(notFoundResult);
+            Assert.NotNull(badRequestErrorMessageResult);
+            Assert.Equal("Board Column Not Found", badRequestErrorMessageResult.Message);
         }
 
         [Fact]
@@ -373,7 +387,7 @@ namespace KanbanBoardApi.UnitTests.Controllers
         }
 
         [Fact]
-        public async void GivenABoardSlugTaskIdAndTaskWhenBoardColumnDoesNotExistThenNotFoundResultReturned()
+        public async void GivenABoardSlugTaskIdAndTaskWhenBoardColumnDoesNotExistThenBadRequestReturned()
         {
             // Arrange
             SetupController();
@@ -395,6 +409,74 @@ namespace KanbanBoardApi.UnitTests.Controllers
             // Assert
             Assert.NotNull(badRequestErrorMessageResult);
             Assert.Equal("Board Column Not Found", badRequestErrorMessageResult.Message);
+        }
+
+        [Fact]
+        public async void GivenABoardSlugAndTaskIdWhenBoardDoesNotExistsThenNotFoundReturned()
+        {
+            // Arrange
+            SetupController();
+            const string boardSlug = "board-name";
+            const int taskId = 1;
+
+            mockCommandDispatcher.Setup(
+                x => x.HandleAsync<DeleteBoardTaskCommand, int>(It.IsAny<DeleteBoardTaskCommand>()))
+                .Throws<BoardNotFoundException>();
+
+            // Act
+            var notFoundResult = await controller.Delete(boardSlug, taskId) as NotFoundResult;
+
+            // Assert
+            Assert.NotNull(notFoundResult);
+        }
+
+        [Fact]
+        public async void GivenABoardSlugAndTaskIdWhenBoardTaskDoesNotExistsThenNotFoundReturned()
+        {
+            // Arrange
+            SetupController();
+            const string boardSlug = "board-name";
+            const int taskId = 1;
+            mockCommandDispatcher.Setup(
+                x => x.HandleAsync<DeleteBoardTaskCommand, int>(It.IsAny<DeleteBoardTaskCommand>()))
+                .Throws<BoardTaskNotFoundException>();
+
+            // Act
+            var notFoundResult = await controller.Delete(boardSlug, taskId) as NotFoundResult;
+
+            // Assert
+            Assert.NotNull(notFoundResult);
+        }
+
+        [Fact]
+        public async void GivenABoardSlugAndTaskIdWhenBoardSlugAndTaskIdFoundThenOkReturned()
+        {
+            // Arrange
+            SetupController();
+            const string boardSlug = "board-name";
+            const int taskId = 1;
+
+            // Act
+            var okResult = await controller.Delete(boardSlug, taskId) as OkResult;
+
+            // Assert
+            Assert.NotNull(okResult);
+        }
+
+        [Fact]
+        public async void GivenABoardSlugAndTaskIdWhenBoardSlugAndTaskIdFoundThenDeleteBoardTaskCommandCalled()
+        {
+            // Arrange
+            SetupController();
+            const string boardSlug = "board-name";
+            const int taskId = 1;
+
+            // Act
+            await controller.Delete(boardSlug, taskId);
+
+            // Assert
+            mockCommandDispatcher.Verify(x => x.HandleAsync<DeleteBoardTaskCommand, int>(
+                It.Is<DeleteBoardTaskCommand>(y => y.BoardSlug == boardSlug && y.BoardTaskId == taskId)), Times.Once);
         }
     }
 }

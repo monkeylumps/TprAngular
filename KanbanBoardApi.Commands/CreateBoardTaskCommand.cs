@@ -6,8 +6,6 @@ namespace KanbanBoardApi.Commands
     {
         public string BoardSlug { get; set; }
 
-        public string BoardColumnSlug { get; set; }
-
         public BoardTask BoardTask { get; set; }
     }
 }

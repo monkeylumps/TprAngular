@@ -11,5 +11,7 @@ namespace KanbanBoardApi.EntityFramework
         Task<int> SaveChangesAsync();
 
         void SetModified(object entity);
+
+        void Delete(object entity);
     }
 }

@@ -24,10 +24,15 @@ namespace KanbanBoardApi.Commands.Handlers
         {
             var boardTask = mappingService.Map<BoardTaskEntity>(command.BoardTask);
 
+            if (!await dataContext.Set<BoardEntity>().AnyAsync(x => x.Slug == command.BoardSlug))
+            {
+                throw new BoardNotFoundException();
+            }
+
             var boardColumn =
                 await dataContext.Set<BoardEntity>()
                     .Where(x => x.Slug == command.BoardSlug)
-                    .Select(x => x.Columns.FirstOrDefault(y => y.Slug == command.BoardColumnSlug))
+                    .Select(x => x.Columns.FirstOrDefault(y => y.Slug == command.BoardTask.BoardColumnSlug))
                     .FirstOrDefaultAsync();
 
             if (boardColumn == null)

@@ -27,9 +27,9 @@ namespace KanbanBoardApi.Controllers
         }
 
         [HttpPost]
-        [Route("{boardSlug}/columns/{boardColumnSlug}", Name = "BoardTaskPost")]
+        [Route("{boardSlug}/tasks", Name = "BoardTaskPost")]
         [ResponseType(typeof(BoardTask))]
-        public async Task<IHttpActionResult> Post(string boardSlug, string boardColumnSlug, BoardTask boardTask)
+        public async Task<IHttpActionResult> Post(string boardSlug, BoardTask boardTask)
         {
             if (!ModelState.IsValid)
             {
@@ -41,7 +41,6 @@ namespace KanbanBoardApi.Controllers
                 var result = await commandDispatcher.HandleAsync<CreateBoardTaskCommand, BoardTask>(new CreateBoardTaskCommand
                 {
                     BoardSlug = boardSlug,
-                    BoardColumnSlug = boardColumnSlug,
                     BoardTask = boardTask
                 });
 
@@ -50,6 +49,10 @@ namespace KanbanBoardApi.Controllers
                 return Created(hyperMediaFactory.GetLink(result, Link.SELF), result);
             }
             catch (BoardColumnNotFoundException)
+            {
+                return BadRequest("Board Column Not Found");
+            }
+            catch (BoardNotFoundException)
             {
                 return NotFound();
             }
@@ -122,6 +125,30 @@ namespace KanbanBoardApi.Controllers
                 return Ok(result);
             }
             catch (BoardNotFoundException)
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpDelete]
+        [Route("{boardSlug}/tasks/{taskId:int}", Name = "BoardTaskDelete")]
+        public async Task<IHttpActionResult> Delete(string boardSlug, int taskId)
+        {
+            try
+            {
+                await commandDispatcher.HandleAsync<DeleteBoardTaskCommand, int>(new DeleteBoardTaskCommand
+                {
+                    BoardSlug = boardSlug,
+                    BoardTaskId = taskId
+                });
+
+                return Ok();
+            }
+            catch (BoardNotFoundException)
+            {
+                return NotFound();
+            }
+            catch (BoardTaskNotFoundException)
             {
                 return NotFound();
             }

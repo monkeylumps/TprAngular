@@ -56,9 +56,9 @@ namespace KanbanBoardApi.Commands.UnitTests.Handlers
             var command = new CreateBoardTaskCommand
             {
                 BoardSlug = "board-name",
-                BoardColumnSlug = "board-column-name",
                 BoardTask = new BoardTask
                 {
+                    BoardColumnSlug = "board-column-name",
                     Name = "test task"
                 }
             };
@@ -93,9 +93,9 @@ namespace KanbanBoardApi.Commands.UnitTests.Handlers
             var command = new CreateBoardTaskCommand
             {
                 BoardSlug = "board-name",
-                BoardColumnSlug = "board-column-name",
                 BoardTask = new BoardTask
                 {
+                    BoardColumnSlug = "board-column-name",
                     Name = "test task"
                 }
             };
@@ -130,9 +130,9 @@ namespace KanbanBoardApi.Commands.UnitTests.Handlers
             var command = new CreateBoardTaskCommand
             {
                 BoardSlug = "board-name",
-                BoardColumnSlug = "board-column-name",
                 BoardTask = new BoardTask
                 {
+                    BoardColumnSlug = "board-column-name",
                     Name = "test task"
                 }
             };
@@ -147,9 +147,8 @@ namespace KanbanBoardApi.Commands.UnitTests.Handlers
             mockMappingService.Verify(x => x.Map<BoardTask>(It.IsAny<BoardTaskEntity>()), Times.Once);
         }
 
-
         [Fact]
-        public async void GivenABoardTaskWhenBoardColumnDoesNotExistThenThrowBoardColumnNotFoundException()
+        public async void GivenABoardTaskWhenBoardDoesNotExistThenThrowBoardNotFoundException()
         {
             // Arrange
             SetupCommandHandler(new List<BoardEntity>());
@@ -157,7 +156,37 @@ namespace KanbanBoardApi.Commands.UnitTests.Handlers
             var command = new CreateBoardTaskCommand
             {
                 BoardSlug = "board-name",
-                BoardColumnSlug = "board-column-name",
+                BoardTask = new BoardTask
+                {
+                    Name = "test task"
+                }
+            };
+
+            mockMappingService.Setup(x => x.Map<BoardColumnEntity>(It.IsAny<BoardColumn>()))
+                .Returns(new BoardColumnEntity
+                {
+                    Name = "test",
+                    Slug = "test"
+                });
+
+            mockSlugService.Setup(x => x.Slugify(It.IsAny<string>())).Returns("test");
+
+            // Act & Assert
+            await Assert.ThrowsAsync<BoardNotFoundException>(() => handler.HandleAsync(command));
+        }
+
+        [Fact]
+        public async void GivenABoardTaskWhenBoardColumnDoesNotExistThenThrowBoardColumnNotFoundException()
+        {
+            // Arrange
+            SetupCommandHandler(new List<BoardEntity>
+            {
+                new BoardEntity { Slug = "board-name" }
+            });
+
+            var command = new CreateBoardTaskCommand
+            {
+                BoardSlug = "board-name",
                 BoardTask = new BoardTask
                 {
                     Name = "test task"
