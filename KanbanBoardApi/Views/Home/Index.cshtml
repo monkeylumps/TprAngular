@@ -1,0 +1,28 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "title";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>title</h2>
+
+<div ng-app="trainingapp">
+    {{1 + 1}}
+
+    <div ng-controller="MainController">
+
+        {{greeting}} , I'm not you buddy guy!
+
+        <p ng-repeat="board in data">
+            {{board.Name}}
+        </p>
+
+        <p>{{error}}</p>
+
+        <p ng-repeat="board in dataPost">
+            {{board.Name}}
+        </p>
+
+    </div>
+</div>
