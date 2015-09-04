@@ -33,17 +33,17 @@ namespace KanbanBoardApi.EntityFramework.Migrations
             var doingBoardColumnEntity = new BoardColumnEntity
             {
                 BoardEntity = boardEntity,
-                Slug = "to-do",
-                Name = "To Do",
-                Order = 1
+                Slug = "doing",
+                Name = "Doing",
+                Order = 2
             };
 
             var doneBoardColumnEntity = new BoardColumnEntity
             {
                 BoardEntity = boardEntity,
-                Slug = "to-do",
-                Name = "To Do",
-                Order = 1
+                Slug = "done",
+                Name = "Done",
+                Order = 3
             };
 
             context.Set<BoardColumnEntity>().AddOrUpdate(x => x.Slug, todoBoardColumnEntity);
