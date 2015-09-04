@@ -10,6 +10,7 @@ using KanbanBoardApi.Queries;
 
 namespace KanbanBoardApi.Controllers
 {
+    [RoutePrefix("boards")]
     public class BoardTaskController : ApiController
     {
         private readonly ICommandDispatcher commandDispatcher;
