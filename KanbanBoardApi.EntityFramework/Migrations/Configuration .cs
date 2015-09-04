@@ -13,21 +13,50 @@ namespace KanbanBoardApi.EntityFramework.Migrations
         protected override void Seed(DataContext context)
         {
             //  This method will be called after migrating to the latest version.
-            context.Set<BoardEntity>().AddOrUpdate(x => x.Slug, new BoardEntity
+
+            var boardEntity = new BoardEntity
             {
                 Name = "Work List",
-                Slug = "work-list"
-            });
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+                Slug = "work-list",
+            };
+
+            context.Set<BoardEntity>().AddOrUpdate(x => x.Slug, boardEntity);
+
+            var todoBoardColumnEntity = new BoardColumnEntity
+            {
+                BoardEntity = boardEntity,
+                Slug = "to-do",
+                Name = "To Do",
+                Order = 1
+            };
+
+            var doingBoardColumnEntity = new BoardColumnEntity
+            {
+                BoardEntity = boardEntity,
+                Slug = "to-do",
+                Name = "To Do",
+                Order = 1
+            };
+
+            var doneBoardColumnEntity = new BoardColumnEntity
+            {
+                BoardEntity = boardEntity,
+                Slug = "to-do",
+                Name = "To Do",
+                Order = 1
+            };
+
+            context.Set<BoardColumnEntity>().AddOrUpdate(x => x.Slug, todoBoardColumnEntity);
+            context.Set<BoardColumnEntity>().AddOrUpdate(x => x.Slug, doingBoardColumnEntity);
+            context.Set<BoardColumnEntity>().AddOrUpdate(x => x.Slug, doneBoardColumnEntity);
+
+            var boardTaskEntity = new BoardTaskEntity
+            {
+                Id = 1,
+                BoardColumnEntity = todoBoardColumnEntity,
+                Name = "Implement UI"
+            };
+            context.Set<BoardTaskEntity>().AddOrUpdate(x => x.Id, boardTaskEntity);
         }
     }
 }
