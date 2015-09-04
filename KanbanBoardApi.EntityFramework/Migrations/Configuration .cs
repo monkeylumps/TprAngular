@@ -13,7 +13,7 @@ namespace KanbanBoardApi.EntityFramework.Migrations
         protected override void Seed(DataContext context)
         {
             //  This method will be called after migrating to the latest version.
-
+            /*
             var boardEntity = new BoardEntity
             {
                 Name = "Work List",
@@ -57,6 +57,7 @@ namespace KanbanBoardApi.EntityFramework.Migrations
                 Name = "Implement UI"
             };
             context.Set<BoardTaskEntity>().AddOrUpdate(x => x.Id, boardTaskEntity);
+            */
         }
     }
 }
