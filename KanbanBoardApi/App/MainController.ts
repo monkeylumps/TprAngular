@@ -1,23 +1,36 @@
-﻿((() => {
-    var app = angular.module("trainingapp");
+﻿module Kandban {
+    export interface IMainModel {
+        greeting: string;
+        error: string;
+        boards: any[];
+        getboard(slug: string);
+    }
 
-    var MainController = ($scope, apiService) => {
-        $scope.greeting = "welcome buddy";
-
-        var boardsss = data => {
-            $scope.data = data.Items;
+    export class MainController implements IMainModel {
+        greeting: string;
+        error: string;
+        boards: any[];
+        board: string;
+        getboard(slug: string) {
+            this.apiService.getBoard(slug, data => {
+                this.board = data.Name;
+            }, reason => {
+                this.error = reason;
+            });
         }
 
-        var boardsssPost = data => {
-            $scope.dataPost = data;
-        }
+        constructor(private apiService: IApiService) {
+            this.greeting = "welcome buddy";
+            const boardsss = data => {
+                this.boards = data.Items;
+            };
 
-        var error = reason => {
-            $scope.error = reason;
+            const error = reason => {
+                this.error = reason;
+            };
+            apiService.getBoards(boardsss, error);
         }
-        //apiService.createboard().then(boardsssPost, error);
-        apiService.getboards().then(boardsss, error);
-    };
+    }
 
-    app.controller("MainController", ["$scope", "apiService", MainController]);
-})());
+    angular.module("Kandban").controller("MainController", ["ApiService", MainController]);
+}

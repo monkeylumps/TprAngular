@@ -7,22 +7,20 @@
 
 <h2>title</h2>
 
-<div ng-app="trainingapp">
-    {{1 + 1}}
+<div ng-app="Kandban">
+    <div ng-controller="MainController as vm">
 
-    <div ng-controller="MainController">
+        {{vm.greeting}} , I'm not you buddy guy!, I'm not you guy friend!, I'm not you friend buddy!
 
-        {{greeting}} , I'm not you buddy guy!
+        <div ng-repeat="board in vm.boards">
+            <p>{{board.Name}}</p>
+        </div>
 
-        <p ng-repeat="board in data">
-            {{board.Name}}
+        <p ng-show="error">There has been an error - {{vm.error}}</p>
+
+        <input type="button" value="" class="btn-primary" ng-click="vm.getboard('danmo')" />
+        <p>
+            {{vm.board}}
         </p>
-
-        <p>{{error}}</p>
-
-        <p ng-repeat="board in dataPost">
-            {{board.Name}}
-        </p>
-
     </div>
 </div>

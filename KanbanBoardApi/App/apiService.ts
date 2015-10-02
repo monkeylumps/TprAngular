@@ -1,25 +1,26 @@
-﻿((() => {
-    var api = $http => {
-        var getboards = () => {
-            return $http.get("http://localhost:2943/boards")
-                .then((response) => {
-                    return response.data;
-                });
-        };
-        var data = { "Slug": "slugg", "Name": "danmo" };
-        var createboard = () => {
-            return $http.post("http://localhost:2943/boards", data)
-                .then((response) => {
-                    return response.data;
-                });
+﻿module Kandban {
+    export interface IApiService {
+        createBoard(board: any, success: any, failure: any);
+        getBoards(success: any, failure: any);
+        getBoard(slug: string, success: any, failure: any);
+    }
+
+    export class ApiService implements IApiService {
+        constructor(private http: ng.IHttpService) {
         }
 
-        return {
-            getboards: getboards,
-            createboard: createboard
+        createBoard(board, success, failure) {
+            this.http.post("http://localhost:2943/boards", board).success(success).error(failure);
         }
-    };
 
-    var module = angular.module("trainingapp");
-    module.factory("apiService", api);
-})());
+        getBoards(success, failure) {
+            this.http.get("http://localhost:2943/boards").success(success).error(failure);
+        }
+
+        getBoard(slug: string, success, failure) {
+            this.http.get("http://localhost:2943/boards/" +  slug).success(success).error(failure);
+        }
+    }
+
+    angular.module("Kandban").service("ApiService", ["$http", ApiService]);
+}
