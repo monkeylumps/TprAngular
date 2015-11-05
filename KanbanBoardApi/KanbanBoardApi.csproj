@@ -205,6 +205,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\alian.gif" />
     <Content Include="Content\Images\giphy.gif" />
+    <Content Include="Content\Images\hypno.gif" />
     <Content Include="Content\Images\nice.gif" />
     <Content Include="Content\Images\Terrance_and_Phillip.png" />
     <Content Include="Content\Images\threefiddy.gif" />
@@ -244,6 +245,7 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\dnd\ngDraggable.js" />
     <Content Include="Scripts\errors.json" />
     <Content Include="Scripts\angular-touch.min.js.map" />
     <Content Include="Scripts\angular-sanitize.min.js.map" />
@@ -1057,9 +1059,14 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="App\apiService.ts" />
+    <TypeScriptCompile Include="App\Services\apiService.ts" />
     <TypeScriptCompile Include="App\App.ts" />
-    <TypeScriptCompile Include="App\MainController.ts" />
+    <TypeScriptCompile Include="App\Controllers\ModalInstanceController.ts" />
+    <TypeScriptCompile Include="App\Interfaces\IBoard.ts" />
+    <TypeScriptCompile Include="App\Interfaces\IColumn.ts" />
+    <TypeScriptCompile Include="App\Interfaces\IMainScope.ts" />
+    <TypeScriptCompile Include="App\Interfaces\ITask.ts" />
+    <TypeScriptCompile Include="App\Controllers\MainController.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui-bootstrap\angular-ui-bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-cookies.d.ts" />

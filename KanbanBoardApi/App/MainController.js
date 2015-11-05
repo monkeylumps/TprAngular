@@ -1,4 +1,3 @@
-/// <reference path="../scripts/typings/angular-ui-bootstrap/angular-ui-bootstrap.d.ts" />
 var Kandban;
 (function (Kandban) {
     var MainController = (function () {
@@ -31,22 +30,12 @@ var Kandban;
             };
             this.scope.changeBoard = function (slug) {
                 apiService.getBoard(slug, board, error);
-                /*
-                apiService.getColumns(slug, columns, error);
-                console.log(scope);
-                console.log(scope.board);
-                console.log(scope.board.Columns);
-
-                var thing =scope.board.Columns;
-                angular.forEach(thing, (column) => {
-                    column.Tasks = apiService.getTasks(scope.board.Slug, column.Slug, error);
-                });*/
             };
             this.scope.openModal = function () {
                 $uibModal.open({
                     animation: true,
                     templateUrl: 'myModalContent.html',
-                    controller: 'ModalInstance',
+                    controller: 'ModalInstanceController',
                     scope: _this.scope
                 });
             };
@@ -54,7 +43,7 @@ var Kandban;
                 $uibModal.open({
                     animation: true,
                     templateUrl: 'myModalTaskContent.html',
-                    controller: 'ModalInstance',
+                    controller: 'ModalInstanceController',
                     scope: _this.scope
                 });
             };
@@ -77,39 +66,21 @@ var Kandban;
             this.scope.back = function () {
                 _this.scope.state = 1;
             };
+            this.scope.onDragComplete = function (data, event, column) {
+                _this.scope.sourceColumn = column;
+            };
+            this.scope.onDropComplete = function (data, column) {
+                data.BoardColumnSlug = column.Slug;
+                column.Tasks.push(data);
+                var index = _this.scope.sourceColumn.Tasks.indexOf(data);
+                _this.scope.sourceColumn.Tasks.splice(index, 1);
+                _this.scope.hypno = true;
+            };
             apiService.getBoards(boards, error);
         }
         return MainController;
     })();
     Kandban.MainController = MainController;
     angular.module("Kandban").controller("MainController", ["$scope", "ApiService", "$uibModal", MainController]);
-    var ModalInstance = (function () {
-        function ModalInstance(scope, apiService, $uibModalInstance) {
-            var _this = this;
-            this.scope = scope;
-            this.apiService = apiService;
-            this.scope.addBoard = function (board) {
-                board.Slug = board.Name;
-                _this.scope.$emit('BoardCreated', board);
-                $uibModalInstance.close();
-            };
-            this.scope.addColumn = function (column, board) {
-                column.Slug = column.Name;
-                _this.scope.$emit('ColumnCreated', column, board);
-                $uibModalInstance.close();
-            };
-            this.scope.addTask = function (task, column, board) {
-                task.BoardColumnSlug = column.Slug;
-                _this.scope.$emit('TaskCreated', task, board);
-                $uibModalInstance.close();
-            };
-            this.scope.close = function () {
-                $uibModalInstance.dismiss('cancel');
-            };
-        }
-        return ModalInstance;
-    })();
-    Kandban.ModalInstance = ModalInstance;
-    angular.module("Kandban").controller("ModalInstance", ["$scope", "ApiService", "$uibModalInstance", ModalInstance]);
 })(Kandban || (Kandban = {}));
 //# sourceMappingURL=MainController.js.map

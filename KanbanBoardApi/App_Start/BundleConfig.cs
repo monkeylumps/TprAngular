@@ -28,13 +28,15 @@ namespace KanbanBoardApi
                 "~/Scripts/angular.js",
                 "~/Scripts/angular-animate.js",
                 "~/Scripts/angular-ui/ui-bootstrap.js",
-                "~/Scripts/angular-ui/ui-bootstrap-tpls.js"
+                "~/Scripts/angular-ui/ui-bootstrap-tpls.js",
+                "~/Scripts/dnd/ngDraggable.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/App").Include(
                 "~/App/App.js",
-                "~/App/MainController.js",
-                "~/App/apiService.js"
+                "~/App/Controllers/MainController.js",
+                "~/App/Controllers/ModalInstanceController.js",
+                "~/App/Services/apiService.js"
                 ));
         }
     }

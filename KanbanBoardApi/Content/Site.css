@@ -15,3 +15,7 @@
 input,
 select,
 textarea { max-width: 280px; }
+
+.toad {
+    background-image: url('Images/hypno.gif');
+}

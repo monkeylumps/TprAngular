@@ -7,8 +7,9 @@
 
 <h2>Kandban</h2>
 
-<div ng-app="Kandban">
-    <div ng-controller="MainController">
+<div ng-class="{'toad' : hypno}">
+
+    <div>
         <div class="row">
             <div class="greetings col-md-12">
                 <h6>{{greeting}}</h6>
@@ -23,10 +24,9 @@
                 </div>
             </div>
         </div>
-
         <div class="col-md-12 btn-bar">
             <input type="button" value="Add new board" class="btn btn-primary" ng-click="openModal()" ng-show="state == 1" />
-            <input type="button" value="Add new column" class="btn btn-primary" ng-click="openModal()" ng-show="state == 2" />
+            <input type="button" value="Add new column" class="btn btn-primary" ng-click="openColumnModal()" ng-show="state == 2" />
             <input type="button" value="Add new task" class="btn btn-primary" ng-click="openTaskModal()" ng-show="state == 2" />
             <input type="button" value="Back" class="btn btn-primary" ng-click="back()" ng-show="state != 1" />
         </div>
@@ -38,46 +38,59 @@
 
         <div class="kanban row" ng-show="state == 2">
             <h1>{{board.Name}}</h1>
-            <div class="col-md-3" ng-repeat="col in board.Columns | orderBy : Order" ng-click="">
-                {{col.Name}}
-                {{col.Order}}
-                <div class="row" ng-repeat="task in col.Tasks">
-                    <div class="col-md-3">
-                        {{task.Name}}
-                    </div>
-                </div>
-            </div>
+            <ul class="col-md-3" ng-repeat="col in board.Columns | orderBy : 'Order'"
+                ng-drop="true"
+                ng-drop-success="onDropComplete($data, col)">
+                <h3>{{col.Name}} - {{col.Order}}</h3>
+                <li ng-repeat="task in col.Tasks"
+                    ng-drag="true"
+                    ng-drag-data="task"
+                    ng-drag-success="onDragComplete($data, $event, col)">
+                    <div class="btn btn-primary">{{task.Name}}</div>
+                </li>
+            </ul>
         </div>
 
         <p ng-show="error">There has been an error - {{error}}</p>
 
-        <script type="text/ng-template" id="myModalContent.html">
+        <script type="text/ng-template" id="myModalBoardContent.html">
             <div class="modal-header">
                 <h3 class="modal-title" ng-show="state == 1">Add new board</h3>
-                <h3 class="modal-title" ng-show="state == 2">Add new column</h3>
             </div>
             <div class="modal-body">
                 <img src="/Content/Images/threefiddy.gif" ng-show="state == 1" />
-                <img src="/Content/Images/alian.gif" ng-show="state == 2" />
-                <form novalidate>
+                <form name="angularBoardForm" ng-submit="addBoard(board, angularBoardForm.$valid)" novalidate>
                     <div ng-show="state == 1">
                         <label>Name:</label>
-                        <input type="text" ng-model="board.Name" required />
-                        <div class="alert alert-danger" role="alert" ng-show="ng-touched && ng-invalid">You have to provide a name for the new board</div>
-                    </div>
-
-                    <div ng-show="state == 2">
-                        <label>Name:</label>
-                        <input type="text" ng-model="column.Name" required />
-                        <label>Order:</label>
-                        <input type="number" ng-model="column.Order" required />
+                        <input type="text" ng-model="board.Name" class="form-control" required />
                         <div class="alert alert-danger" role="alert" ng-show="ng-touched && ng-invalid">You have to provide a name for the new board</div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" type="submit" ng-click="addBoard(board)" ng-show="state == 1">Save</button>
-                <button class="btn btn-primary" type="submit" ng-click="addColumn(column, board)" ng-show="state == 2">Save</button>
+                <button class="btn btn-primary" type="submit" ng-show="state == 1" ng-disabled="angularBoardForm.$invalid">Save</button>
+                <button class="btn btn-warning" type="button" ng-click="close()">Cancel</button>
+            </div>
+        </script>
+
+        <script type="text/ng-template" id="myModalColumnContent.html">
+            <div class="modal-header">
+                <h3 class="modal-title" ng-show="state == 2">Add new column</h3>
+            </div>
+            <div class="modal-body">
+                <img src="/Content/Images/alian.gif" ng-show="state == 2" />
+                <form name="angularColumnForm" ng-submit="addColumn(column, board, angularColumnForm.$valid)" novalidate>
+                    <div ng-show="state == 2">
+                        <label>Name:</label>
+                        <input type="text" ng-model="column.Name" class="form-control" required />
+                        <label>Order:</label>
+                        <input type="number" ng-model="column.Order" class="form-control" required />
+                        <div class="alert alert-danger" role="alert" ng-show="ng-touched && ng-invalid">You have to provide a name for the new board</div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="submit" ng-show="state == 2" ng-disabled="angularColumnForm.$invalid">Save</button>
                 <button class="btn btn-warning" type="button" ng-click="close()">Cancel</button>
             </div>
         </script>
@@ -88,12 +101,12 @@
             </div>
             <div class="modal-body">
                 <img src="/Content/Images/towli.gif" />
-                <form novalidate>
+                <form name="angularTaskForm" ng-submit="addTask(task, column, board, angularTaskForm.$valid)" novalidate>
                     <div>
                         <label>Name:</label>
-                        <input type="text" ng-model="task.Name" required />
+                        <input type="text" ng-model="task.Name" class="form-control" required />
                         <div class="alert alert-danger" role="alert" ng-show="ng-touched && ng-invalid">You have to provide a name for the new board</div>
-                        
+
                         <div class="form-group">
                             <label for="sel1">Select list:</label>
                             <select class="form-control" ng-model="column.Slug" ng-options="column.Slug as column.Name for column in board.Columns"></select>
@@ -102,7 +115,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" type="submit" ng-click="addTask(task, column, board)">Save</button>
+                <button class="btn btn-primary" type="submit" ng-disabled="angularTaskForm.$invalid">Save</button>
                 <button class="btn btn-warning" type="button" ng-click="close()">Cancel</button>
             </div>
         </script>

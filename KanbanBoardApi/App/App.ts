@@ -1,3 +1,3 @@
 ﻿module Kandban {
-    var app = angular.module("Kandban", ['ngAnimate', 'ui.bootstrap']);
+    var app = angular.module("Kandban", ['ngAnimate', 'ui.bootstrap', 'ngDraggable']);
 }
