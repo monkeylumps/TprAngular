@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using Mindscape.Raygun4Net.WebApi;
 
 namespace KanbanBoardApi
 {
@@ -6,6 +7,7 @@ namespace KanbanBoardApi
     {
         public static void Register(HttpConfiguration config)
         {
+            RaygunWebApiClient.Attach(config);
             // Web API configuration and services
 
             // Web API routes

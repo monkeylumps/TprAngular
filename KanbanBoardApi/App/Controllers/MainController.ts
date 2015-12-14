@@ -9,6 +9,8 @@
             };
 
             const error = reason => {
+                //rg4js()
+                //Raygun.send(new Error('Failed $http request', reason));
                 this.scope.error = reason;
                 this.scope.state = 3;
             };
