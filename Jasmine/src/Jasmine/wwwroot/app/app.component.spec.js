@@ -1,4 +1,6 @@
-System.register(['./app.component', './hero.service'], function(exports_1) {
+System.register(['./app.component', './hero.service'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var app_component_1, hero_service_1;
     return {
         setters:[

@@ -1,0 +1,31 @@
+<html>
+<head>
+    <title>Jasmine Tests</title>
+    <script src="https://code.angularjs.org/tools/system.js"></script>
+    <link rel="stylesheet" href="lib/jasmine-core/lib/jasmine-core/jasmine.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.4.1/jasmine.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.4.1/jasmine-html.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.4.1/boot.js"></script>
+    <script src="https://code.angularjs.org/2.0.0-beta.0/angular2.dev.js"></script>
+    <script src="https://code.angularjs.org/tools/typescript.js"></script>
+    <script src="https://code.angularjs.org/2.0.0-beta.0/Rx.js"></script>
+    <script src="https://code.angularjs.org/2.0.0-beta.0/angular2-polyfills.js"></script>
+</head>
+<body>
+    <script>
+        System.config({
+            packages: {
+                app: {
+                    format: 'register',
+                    defaultExtension: 'js'
+                }
+            }
+        });
+        Promise.all([
+          System.import('app/hero.spec'),
+          System.import('app/app.component.spec')
+        ])
+              .then(null, console.error.bind(console));
+    </script>
+</body>
+</html>

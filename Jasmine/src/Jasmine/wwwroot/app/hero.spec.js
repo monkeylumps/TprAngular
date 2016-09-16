@@ -1,4 +1,6 @@
-System.register(['./hero'], function(exports_1) {
+System.register(['./hero'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var hero_1;
     return {
         setters:[

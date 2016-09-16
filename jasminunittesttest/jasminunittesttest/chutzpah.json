@@ -1,0 +1,31 @@
+﻿{
+  "Compile": {
+    "Mode": "External",
+    "Extensions": [ ".ts" ],
+    "ExtensionsWithNoOutput": [ ".d.ts" ]
+  },
+  "TestHarnessReferenceMode": "AMD",
+  "TestHarnessLocationMode": "SettingsFileAdjacent",
+  "Framework": "jasmine",
+  "IncludeInTestHarness": false,
+  "References": [
+    {
+      "Includes": [
+        "*/lib/1/*.js",
+        "*/lib/2/*.js",
+        "*/lib/3/*.js",
+        "*/lib/4/*.js"
+      ],
+      "Excludes": [ "*/app/*.d.ts" ]
+    }
+  ],
+  "Tests": [
+    {
+      "Includes": [
+        "*/app/*spec.ts",
+        "*/*.test.html"
+      ],
+      "Excludes": [ "*/app/*.d.ts" ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+﻿{
+  "Framework": "jasmine",
+  "TestHarnessReferenceMode": "AMD",
+  "TestHarnessLocationMode": "SettingsFileAdjacent",
+  "Tests": [
+    {
+      "Path": "scripts/node.component.spec.js"
+    }
+  ],
+  "References": [
+    { "Path": "../node_modules/es6-shim/es6-shim.js" },
+    { "Path": "../node_modules/systemjs/dist/system-polyfills.src.js" },
+    { "Path": "../node_modules/angular2/bundles/angular2-polyfills.js" },
+    { "Path": "../node_modules/systemjs/dist/system.src.js" },
+    { "Path": "../node_modules/rxjs/bundles/Rx.js" },
+    { "Path": "../node_modules/angular2/bundles/angular2.dev.js" },
+    { "Path": "scripts/system-config.js" }
+  ]
+}

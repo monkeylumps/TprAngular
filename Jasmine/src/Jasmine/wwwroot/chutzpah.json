@@ -4,7 +4,7 @@
     "Extensions": [ ".ts" ],
     "ExtensionsWithNoOutput": [ ".d.ts" ]
   },
-  "TestHarnessReferenceMode": "AMD",
+  //"TestHarnessReferenceMode": "AMD",
   "TestHarnessLocationMode": "SettingsFileAdjacent",
   "Framework": "jasmine",
   "IncludeInTestHarness": false,
@@ -23,7 +23,7 @@
     {
       "Includes": [
         "*/app/*spec.ts",
-        "*/*.test.html"
+        //"*/*.test.html"
       ],
       "Excludes": [ "*/app/*.d.ts" ]
     }

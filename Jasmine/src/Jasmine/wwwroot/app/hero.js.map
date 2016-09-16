@@ -1,1 +1,1 @@
-{"version":3,"file":"hero.js","sourceRoot":"","sources":["hero.ts"],"names":["Hero","Hero.constructor"],"mappings":";;;;;YAKA;gBACIA,cACWA,EAAUA,EACVA,IAAYA;oBADZC,OAAEA,GAAFA,EAAEA,CAAQA;oBACVA,SAAIA,GAAJA,IAAIA,CAAQA;gBAEvBA,CAACA;gBACLD,WAACA;YAADA,CAACA,AAND,IAMC;YAND,uBAMC,CAAA"}
+{"version":3,"file":"hero.js","sourceRoot":"","sources":["hero.ts"],"names":[],"mappings":";;;;;;;YAKA;gBACI,cACW,EAAU,EACV,IAAY;oBADZ,OAAE,GAAF,EAAE,CAAQ;oBACV,SAAI,GAAJ,IAAI,CAAQ;gBAEvB,CAAC;gBACL,WAAC;YAAD,CAAC,AAND,IAMC;YAND,uBAMC,CAAA"}
